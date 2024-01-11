@@ -76,7 +76,7 @@ print("My name is {} and I am {}".format(name,age))
 
 * In the format function you can pass parameter index {`0`}, {`1`}
 
-* It is possible to format floats {`:f`} to define the type, {`:.2f`} 2 places after the comma, {`:.7.2f`} width of 7 characters and 2 of which will be after the decimal point., {`:02f`} an integer in a string with a total width of 2 characters, and padding with leading zeros if necessary (type `d` = integers).
+* It is possible to format floats {`:f`} to define the type, {`:.2f`} 2 places after the comma, {`:.7.2f`} width of 7 characters and 2 of which will be after the decimal point., {`:02d`} an integer in a string with a total width of 2 characters, and padding with leading zeros if necessary (type `d` = integers).
 
 </details>
 
