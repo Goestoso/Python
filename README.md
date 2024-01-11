@@ -98,7 +98,7 @@ var = input("Type your name: ")
 ➕ is used to add and concatenate;
 > print(1 + 2) returns: 3 // print('1' + 2) returns: 12
 
-❌ Python does not perform implicit conversion, and a `sugar syntax` may occur in cases of * for example;
+❌ Python does not perform implicit conversion, and a `sugar syntax` may occur in cases of `*` for example;
 
 > print('1' * 2) returns: 1 \n 1
 
