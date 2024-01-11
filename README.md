@@ -148,6 +148,8 @@ multiplication = num1 * num2
 
 → `/` returns float and `//` returns int
 
+> print(1/2 + ' and ' + 1//2) # 0.5 and 0
+
 ➕ is used to add and concatenate;
 > print(1 + 2) returns: 3 // print('1' + 2) returns: 12
 
