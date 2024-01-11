@@ -127,6 +127,27 @@ var = input("Type your name: ")
 * `bool():` converts to an boolean value;
 * `list(), tuple(), set(), dict():` used to create lists, tuples, sets and dictionaries, respectively;
 
+<details>
+
+<summary>decimal</summary>
+
+* for more precision of floating point numbers:
+
+```
+from decimal import Decimal
+
+num1 = Decimal('3.1415')
+num2 = Decimal('2.7182')
+multiplication = num1 * num2
+```
+
+→ `Decimal():` class method.
+
+→ `decimal:` library.
+</details>
+
+→ `/` returns float and `//` returns int
+
 ➕ is used to add and concatenate;
 > print(1 + 2) returns: 3 // print('1' + 2) returns: 12
 
@@ -155,6 +176,8 @@ var = input("Type your name: ")
 >----#execute code if false         
 
 📑 Indentation is mandatory in Python to create blocks of code!
+
+> `ternary:` var = 'value' if condition else 'other_value'
 
 <h3>Repeat loops</h3>
 
