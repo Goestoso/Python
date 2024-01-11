@@ -78,14 +78,20 @@ print("My name is {} and I am {}".format(name,age))
 
 * It is possible to format floats {`:f`} to define the type, {`:.2f`} 2 places after the comma, {`:.7.2f`} width of 7 characters and 2 of which will be after the decimal point., {`:02d`} an integer in a string with a total width of 2 characters, and padding with leading zeros if necessary (type `d` = integers).
 
-</details>
-
 * `f-strings:` can tell Python that values ​​will be inserted directly into a string.
 
 ```
 name = 'Mathew'
 print(f'My name is {name}')
 # It is also possible to pass functions and methods
+```
+</details>
+
+* `round():` is used to round float values ​​to the nearest integer.
+
+```
+round(5.678) # 6
+round(5.678,1) #is rounding the number to one decimal place, 5.7
 ```
 
 <h3>Python Typing</h3>
