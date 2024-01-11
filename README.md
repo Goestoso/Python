@@ -110,9 +110,13 @@ var = input("Type your name: ")
 
 * Use `and` if two comparisons need to be true and `or` if only one condition needs to be true;
 
-> if (condition):
+> if (condition1 and condition2):
 > <br>
 >----#execute code if true
+> <br>
+> elif (condition or other_condition):
+> <br>
+>----#execute code if "else if" is true
 > <br>
 > else: 
 > <br>
