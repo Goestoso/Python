@@ -66,7 +66,7 @@ type(var)
 
 In Python, it is not necessary to declare the variable's type explicitly ('str', int(1), float(1.2), bool(true or false)...), as it is automatically determined based on the value assigned to it.
 
-→ This makes the language flexible and `dynamic`.
+→ This makes the language `flexible` and `dynamic`.
 
 <details>
 
