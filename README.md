@@ -62,6 +62,32 @@ type(var)
 # output: 'str'
 ```
 
+* `.format():` used to perform string interpolation, that is, it allows you to insert values ​​into a formatted string, replacing placeholders `{}`.
+
+```
+name = "Alice"
+age = 30
+print("My name is {} and I am {}".format(name,age))
+```
+
+<details>
+
+<summary>strings interpolation</summary>
+
+* In the format function you can pass parameter index {`0`}, {`1`}
+
+* It is possible to format floats {`:f`} to define the type, {`:.2f`} 2 places after the comma, {`:.7.2f`} width of 7 characters and 2 of which will be after the decimal point., {`:02f`} an integer in a string with a total width of 2 characters, and padding with leading zeros if necessary (`d` = integers).
+
+</details>
+
+* `f-strings:` can tell Python that values ​​will be inserted directly into a string.
+
+```
+name = 'Mathew'
+print(f'My name is {name}')
+# It is also possible to pass functions and methods
+```
+
 <h3>Python Typing</h3>
 
 In Python, it is not necessary to declare the variable's type explicitly ('str', int(1), float(1.2), bool(true or false)...), as it is automatically determined based on the value assigned to it.
@@ -123,4 +149,35 @@ var = input("Type your name: ")
 >----#execute code if false         
 
 📑 Indentation is mandatory in Python to create blocks of code!
+
+<h3>Repeat loops</h3>
+
+* `while:` it receives a condition to execute the block of code as long as the condition is true.
+
+> while (condition):
+> <br>
+>----#execute the code as long as it is true
+> <br>
+> increment += value
+
+* `+=` is used to update the value of the variable by adding a certain value to it.
+
+* `for:` the idea of ​​for is to define the initial value and the final value, which the loop automatically increments.
+
+→ To define the initial and final value, use the `range()` function, passing them as a parameter.
+
+> The `range()` function in Python is used to generate a sequence of numbers.
+
+```
+for i in range(5):
+    print(i) # This will print the numbers 0 to 4.
+    break # get out of the loop
+    continue # to skip the rest of the code in the loop body and go to the next iteration.
+
+for i in range(2, 8):
+    print(i) # This will print the numbers 2 through 7.
+
+for i in range(1, 10, 2): # range(start, stop, step), where step is the interval between the numbers
+    print(i)
+```
 
