@@ -94,6 +94,12 @@ round(5.678) # 6
 round(5.678,1) #is rounding the number to one decimal place, 5.7
 ```
 
+* `abs():` for absolute (positive) values.
+
+```
+print(abs(-3.14)) # Output: 3.14
+```
+
 <h3>Python Typing</h3>
 
 In Python, it is not necessary to declare the variable's type explicitly ('str', int(1), float(1.2), bool(true or false)...), as it is automatically determined based on the value assigned to it.
@@ -212,3 +218,60 @@ for i in range(1, 10, 2): # range(start, stop, step), where step is the interval
     print(i)
 ```
 
+ ➡️ <a href="https://docs.python.org/3/library/functions.html" target="_blank">More about built-in functions...</a>
+
+<h2>Built-in Modules</h2>
+
+These are libraries that come with the Python installation.
+
+<h3>random</h3>
+
+→ Generate random values:
+
+```
+import random # import the library
+random.random() * 100 # To increase the value 100 times
+```
+
+> `random:` it generates values ​​between 0 and 1.
+
+```
+random.randrange(1,100) # creates a value from 1 to 100
+```
+
+* Random numbers are pseudo-random, as the value generated is actually a new `seed`. Therefore, it uses the milliseconds as a seed behind the scenes with the `seed()` function.
+
+<h3>math</h3>
+
+→ Provides mathematical functions such as sine, cosine, logarithms, etc.
+
+```
+import math
+print(math.sin(x)) # calculate the sine of x
+math.sqrt(x) # Return the square root of x.
+math.cos(x) # Return the cosine of x radians.
+math.tan(x) # Return the tangent of x radians.
+math.log10(x) # Return the base-10 logarithm of x.
+math.pow(x, y) # Return x raised to the power y.
+```
+
+<h3>datetime</h3>
+
+→ Manipulation of dates and times.
+
+```
+from datetime import datetime, timedelta
+now = datetime.now() # Gets the current date
+
+# Add a day to the current date
+one_day = timedelta(days=1)
+tomorrow_date = current_date + one_day
+
+# Subtract a week from the current date
+one_week = timedelta(weeks=1)
+past_date = current_date - one_week
+
+# Calculate the difference between two dates
+other_date = datetime(2023, 12, 31)
+difference = other_date - current_date
+```
