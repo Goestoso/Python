@@ -275,3 +275,14 @@ past_date = current_date - one_week
 other_date = datetime(2023, 12, 31)
 difference = other_date - current_date
 ```
+
+➡️ <a href="https://docs.python.org/3/py-modindex.html" target="_blank">More about built-in modules...</a>
+
+<h2>Creating Functions</h2>
+
+Using the word `def` you can define a function.
+
+> def funtion(): # file function.py
+> <br>
+>----# function code
+
