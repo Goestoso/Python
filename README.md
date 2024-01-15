@@ -286,3 +286,9 @@ Using the word `def` you can define a function.
 > <br>
 >----# function code
 
+→ This way it is possible to call custom functions in other files, using the module name and calling its function:
+
+```
+import functionp
+functionp.function()
+```
