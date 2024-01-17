@@ -130,7 +130,7 @@ var = input("Type your name: ")
 
 * `int():` converts to an integer value;
 * `float():` converts to an float value;
-* `bool():` converts to an boolean value;
+* `bool():` converts to an boolean value (empty values ​​and 0 when applied return False);
 * `list(), tuple(), set(), dict():` used to create lists, tuples, sets and dictionaries, respectively;
 
 <details>
@@ -187,6 +187,10 @@ multiplication = num1 * num2
 
 > `ternary:` var = 'value' if condition else 'other_value'
 
+❗To negate a Boolean value:
+
+> `not` bool-condition
+
 <h3>Repeat loops</h3>
 
 * `while:` it receives a condition to execute the block of code as long as the condition is true.
@@ -219,6 +223,14 @@ for i in range(1, 10, 2): # range(start, stop, step), where step is the interval
 ```
 
  ➡️ <a href="https://docs.python.org/3/library/functions.html" target="_blank">More about built-in functions...</a>
+
+ <h3>Python Key words</h3>
+
+> There are reserved value words (start with `UPPERCASE`):
+> `True-False-None`
+<br>
+> And modifying reserved words (usually in `lowercase`):
+> `if-while-in-not`
 
 <h2>Built-in Modules</h2>
 
@@ -303,9 +315,49 @@ s = sum(3,4)
 
 `__name__:` an execution variable that indicates the context in which a module or script is being executed.
 
-> Therefore, it can be `__main__` when executed `directly` or the `module name` if `imported`.
+> Therefore, it can be `__main__` when executed `directly` or the `module name` if `imported`:
 
 ```
 if(__name__ == "__main__")
     function()
 ```
+
+<h2>Sequence Types</h2>
+
+The main sequence types are, in addition to strings, lists (vectors and matrices), tuples, dictionaries, ordered and unordered collections.
+
+<h3>str</h3>
+
+A string is considered one of the main sequence types.
+
+→ A string is a `sequence of characters` and can be manipulated (***in Python***) like a sequence, meaning you can access individual characters by index, iterate over the characters, slice the string, and perform various sequence-specific operations.
+
+* `.find():` used to find the position of a substring occurrence.
+
+```
+word = "banana"
+word.find("b") # returns the position 0
+```
+
+* `.upper():` method of creating a substring with all characters capitalized.
+
+```
+word = "banana"
+word.upper() # returns BANANA
+```
+
+* `.lower():` convert to lowercase.
+
+```
+word = "BANANA"
+word.lower() # returns banana
+```
+
+* `.strip():` removes empty spaces.
+
+```
+words = "for get"
+words.strip() # returns 'forget'
+```
+
+> The `str` type is ***immutable***, so string methods will always create replicas, that is, substrings.
