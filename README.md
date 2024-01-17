@@ -292,3 +292,20 @@ Using the word `def` you can define a function.
 import functionp
 functionp.function()
 ```
+
+→ Functions can have parameters and returns:
+
+```
+def sum(a,b):
+     return a + b
+s = sum(3,4)
+```
+
+`__name__:` an execution variable that indicates the context in which a module or script is being executed.
+
+> Therefore, it can be `__main__` when executed `directly` or the `module name` if `imported`.
+
+```
+if(__name__ == "__main__")
+    function()
+```
