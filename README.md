@@ -361,3 +361,40 @@ words.strip() # returns 'forget'
 ```
 
 > The `str` type is ***immutable***, so string methods will always create replicas, that is, substrings.
+
+
+➡️ <a href="https://docs.python.org/3/library/stdtypes.html#string-methods" target="_blank">More about str methods...</a>
+
+<h3>lists</h3>
+
+To create a list we use `[]`:
+
+```
+var = []
+```
+
+→ There are several list functions, such as `min()`, `max()` or `len()`;
+
+→ It is also possible to access its methods such as `.append()`, `.extend()`, `.index()`, `.remove()`, `.insert()`, `.count()`, `.sort()`, `.pop()` , `.reverse()` or `.clear()`;
+
+> The `in` operator returns _True_ or _False_ if the element is inside the list;
+
+```
+list = ['element', 'object']
+'element' in list # returns True
+ ```
+
+➡️ <a href="https://docs.python.org/3/library/stdtypes.html#lists" target="_blank">More about lists methods...</a>
+
+<h3>tuples</h3>
+
+To create a tuple we use `()`:
+
+```
+var = ()
+```
+
+> The `list()` is _mutable_, while the `tuple()` is _immutable_.
+
+⚠️ Methods that alter lists ***do not*** work on tuples!
+
