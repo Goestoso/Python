@@ -398,3 +398,4 @@ var = ()
 
 ⚠️ Methods that alter lists ***do not*** work on tuples!
 
+➡️ <a href="https://docs.python.org/3/library/stdtypes.html#tuples" target="_blank">More about tuples methods...</a>
