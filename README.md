@@ -399,3 +399,101 @@ var = ()
 ⚠️ Methods that alter lists ***do not*** work on tuples!
 
 ➡️ <a href="https://docs.python.org/3/library/stdtypes.html#tuples" target="_blank">More about tuples methods...</a>
+
+<h3>lists x tuples</h3>
+
+→ It is possible to implement lists within tuples and vice versa;
+
+```
+foods = ['rice', 'bean']
+drinks = ['water', 'juice']
+stock = (foods, drinks)
+```
+
+→ To access values ​​from lists or tuples with implementation, use `[][]`;
+
+```
+foods = ['rice', 'bean']
+drinks = ['water', 'juice']
+stock = (foods, drinks)
+
+# Acessing the list of foods
+list_foods = stock[0]
+print(list_foods)  # Output: ['rice', 'bean']
+
+# Acessing the list of drinks
+list_drinks = stock[1]
+print(list_drinks)  # Output: ['water', 'juice']
+
+# Acessing the first item of the food list
+first_food = stock[0][0]
+print(first_food)  # Output: 'rice'
+```
+
+→ Using the `list()` and `tuple()` functions it is possible to convert arrays;
+
+> Remember that when you try to convert a tuple to a list, you are creating a new list and not changing the original tuple, since _tuples are immutable_.
+
+<h3>set</h3>
+
+`set()` is used to create a collection (***not a sequence***) with unique elements using `{}`:
+
+```
+var = {}
+```
+
+→ To add values ​​to _set_ you must use `.add()`;
+
+→ _set_ has no indexes as it is _not a sequence_.
+
+<h3>dict</h3>
+
+The `dict()` creates a collection that associates key with value:
+
+```
+var = {'value':1}
+```
+
+→ You can also associate a key to create lists:
+
+```
+# Creating a empty dict
+my_dict = {}
+
+# Adding keys and associating lists to them
+my_dict['fruits'] = ['apple', 'banana', 'orange']
+my_dict['animals'] = ['dog', 'cat', 'bird']
+
+# Acessing the values associated to the keys
+print(my_dict['fruits'])  # Output: ['apple', 'banana', 'orange']
+print(my_dict['animals'])  # Output: ['cachorro', 'cat', 'bird']
+
+```
+
+<details>
+
+<summary>OrderedDict</summary>
+
+* Is a subclass of the dict (dictionary) type in Python that maintains the insertion order of items:
+
+```
+from collections import OrderedDict
+
+# Creating a OrderedDict
+ordered_dict = OrderedDict()
+
+# Adding items
+ordered_dict['one'] = 1
+ordered_dict['two'] = 2
+ordered_dict['three'] = 3
+
+# Iterating over the OrderedDict
+for key, value in ordered_dict.items():
+    print(key, value)
+```
+
+→ `OrderedDict():` class method.
+
+→ `collections:` library.
+
+</details>
