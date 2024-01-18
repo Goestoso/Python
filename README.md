@@ -448,7 +448,7 @@ var = {}
 
 <h3>dict</h3>
 
-The `dict()` creates a collection that associates key with value:
+The `dict()` creates a collection (***not a sequence***) that associates key with value:
 
 ```
 var = {'value':1}
