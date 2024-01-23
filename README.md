@@ -361,6 +361,8 @@ globals()
 
 ⚠️ If you need to modify a global variable within a function, you will need to declare it as global within the function;
 
+➡️ <a href="https://www.w3schools.com/python/python_functions.asp" target="_blank">More about creating functions...</a>
+
 <h2>Sequence Types</h2>
 
 The main sequence types are, in addition to strings, lists (vectors and matrices), tuples, dictionaries, ordered and unordered collections.
