@@ -329,6 +329,37 @@ if(__name__ == "__main__")
 
 * Values ​​of _primitive types_ are immutable, so passing is ***by value***, as in the case of `str` and `int`.
 
+<h3>Variables</h3>
+
+<h4>Local Variables:</h4>
+
+* Defined within a method or function;
+
+* The scope is limited to that function or method;
+
+* It is _created when the function is called_ and _destroyed when completed_;
+
+```
+locals()
+```
+
+⚠️ They are ***not accessible outside*** the function;
+
+<h4>Global Variables</h4>
+
+* Defined outside the function;
+
+* It is accessible anywhere in the code;
+
+```
+globals()
+# var_global = "global"
+#def example():
+#    global var_global
+
+```
+
+⚠️ If you need to modify a global variable within a function, you will need to declare it as global within the function;
 
 <h2>Sequence Types</h2>
 
