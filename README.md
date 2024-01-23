@@ -229,6 +229,7 @@ for i in range(1, 10, 2): # range(start, stop, step), where step is the interval
 > There are reserved value words (start with `UPPERCASE`):
 > `True-False-None`
 <br>
+
 > And modifying reserved words (usually in `lowercase`):
 > `if-while-in-not`
 
@@ -321,6 +322,13 @@ s = sum(3,4)
 if(__name__ == "__main__")
     function()
 ```
+
+<h3>Parameters</h3>
+
+* In _dynamic typing_, the passing of object parameters is ***by reference*** (in the case of mutable objects), pointing to the `array` type variable, for example.
+
+* Values ​​of _primitive types_ are immutable, so passing is ***by value***, as in the case of `str` and `int`.
+
 
 <h2>Sequence Types</h2>
 
