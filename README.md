@@ -545,3 +545,5 @@ file.read() #.readLine reads a line
 ```
 with open("file") as name
 ```
+
+➡️ <a href="https://www.w3schools.com/python/python_ref_file.asp" target="_blank">More about file methods...</a>
