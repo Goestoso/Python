@@ -497,3 +497,43 @@ for key, value in ordered_dict.items():
 → `collections:` library.
 
 </details>
+
+<h2>Files</h2>
+
+→ To open a file:
+
+```
+file = open("file_name.txt", "w")
+```
+
+> `file_name` is the name of the file;
+> `w:` to write;
+> `r:` to read;
+> `rb:` to read binary;
+> `a:` to append;
+
+→ To write to a file:
+
+```
+file.write("word")
+```
+
+→ To close a file:
+
+```
+file.close()
+```
+
+→ To read a file:
+
+```
+file.read() #.readLine reads a line
+```
+
+* The read pointer goes to the end of the file, so you have to open it again.
+
+> `with:` guarantees the closure of the file even with an error.
+
+```
+with open("file") as name
+```
