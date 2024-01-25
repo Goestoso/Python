@@ -8,3 +8,26 @@
 </div>
 
 <br>
+
+> `Procedural Programming:` is a form (paradigm) concentrated in functions and procedures (sequentially).
+
+```
+def calculate_average(list):
+    sum = sum(list)
+    return sum/len(list)
+```
+
+* It is suitable for simple tasks or _scripts_.
+
+> `OOP:` is centered on _objects_, which can ***encapsulate*** data and related functionalities.
+
+```
+class Student:
+    def __init__(self, name, age):
+        self.name = name
+        self.age = age
+    def show(self):
+        print(f"I name is {self.name} and I am {self.age} years old.")
+```
+
+* Useful for more complex projects, where it is possible _to model the system_ in terms of objects interacting with each other.
