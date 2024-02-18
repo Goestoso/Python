@@ -169,6 +169,66 @@ class Daughter(Father): #Daughter inherits from father
     #... daughter's attributes
 ```
 
-> `__` or `_:` In Python, the underscores "__" are transformed into another variable and this is called ___name mangling___.
+> `__` or `_` → in Python, the underscores "__" are transformed into another variable and this is called ___name mangling___.
 
+<img src="https://github.com/Goestoso/Python/assets/132786474/2144a292-4de9-4950-9571-6b878f5768e9" alt="Heritage" align="center">
+<br>
+> `super():` function that allows you to call a method in the parent class, helping to avoid code duplication.
 
+```
+#class
+    #def
+        super().__init__(attributes)
+```
+
+- Python supports inheritance from more than one class.
+- The concept is to ___extend___ the mother class to the subclasses.
+- This way it is possible to have _flexibility_ in the code.
+
+> `class methods:` `@classmethod` to access class attributes, within instance methods, using `__class__`.
+
+```
+#class
+    @classmethod
+        def info(cls): #cls is a convention for the class instance (1st argument)
+            #return
+```
+
+<h3>Polymorphism</h3>
+
+🔁 Allows objects of different classes to be treated uniformly.
+
+🔃 An object can be referenced through a parent class, but still execute its child class-specific methods.
+
+```
+#example in python is the list
+son_and_daughter = [obj1, obj2]
+```
+
+<img src= "https://github.com/Goestoso/Python/assets/132786474/ba579334-dc12-4a36-9c77-d9881fc5cf42" alt="Polymorphism" align="center">
+<br>
+
+- In Python, method overriding is ___implicit___, just define a method with the same name in the child class that it will replace in the parent class.
+
+> Father → def print_method(self):
+> <br>
+> Daughter → print_method(self):
+
+<h3>Dunder methods (double underscore methods)</h3>
+
+→ Refers to special methods in python and are defined like this: `__method__()`.
+
+> `__str__():` responsible for representing the object in textual form (string).
+
+```
+def __str__(self):
+    return 'str'
+```
+
+> `__repr__():` used to show a representation that helps in debugging or logging a code.
+
+```
+list = [1, 2, 3, 4, 5]
+print(repr(list)) # [1,2,3,4,5]
+#print how the object is represented
+```
