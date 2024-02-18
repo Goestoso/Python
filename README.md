@@ -232,3 +232,5 @@ list = [1, 2, 3, 4, 5]
 print(repr(list)) # [1,2,3,4,5]
 #print how the object is represented
 ```
+
+➡️ <a href="https://www.geeksforgeeks.org/dunder-magic-methods-python/" target="_blank">More about dunder methods...</a>
