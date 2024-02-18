@@ -214,6 +214,41 @@ son_and_daughter = [obj1, obj2]
 > <br>
 > Daughter → print_method(self):
 
+- ___Example___:
+
+```
+class Animal:
+    def make_sound(self):
+        pass
+
+class Dog(Animal):
+    def make_sound(self):
+        return "Woof!"
+
+class Cat(Animal):
+    def make_sound(self):
+        return "Meow!"
+
+class Cow(Animal):
+    def make_sound(self):
+        return "Moo!"
+
+# Function to make an animal make a sound
+def animal_sound(animal):
+    return animal.make_sound()
+
+# Creating instances of classes
+dog = Dog()
+cat = Cat()
+cow = Cow()
+
+# Calling the animal_sound function with different instances
+print(animal_sound(dog))  # Saída: Woof!
+print(animal_sound(cat))  # Saída: Meow!
+print(animal_sound(cow))  # Saída: Moo!
+
+```
+
 <h3>Dunder methods (double underscore methods)</h3>
 
 → Refers to special methods in python and are defined like this: `__method__()`.
