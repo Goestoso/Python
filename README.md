@@ -31,3 +31,28 @@ class Student:
 ```
 
 * Useful for more complex projects, where it is possible _to model the system_ in terms of objects interacting with each other.
+
+<h2>Classes and Objects</h2>
+
+> `Class:` A class is like a template or a blueprint for creating _objects_.
+
+→ When declaring the name of a class in Python, you must adopt ___CamelCase___.
+
+> `Object:` an object is an instance of a class.
+
+```
+class Book:
+    pass #keyword to ignore classes and methods
+book1 = Book() #creating the object calling the class
+#reference
+```
+
+- `__init__:` special method called ___constructor___(executed automatically when a new object is created);
+- `(self):` the _self_ attribute is used to refer to the current object;
+
+```
+def __init__(self, name, age):
+    self.name = name #atrribute
+    self.age = age #atrribute
+```
+
