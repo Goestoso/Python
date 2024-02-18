@@ -119,3 +119,56 @@ self.__attribute_private
 
 > `@property:` in python it is not common to use getters and setters, however you can use the _property_ to change this behavior.
 
+<h4>Properties</h4>
+
+→ Methods that give access are named _properties_, indicating to Python the intention to have access to the object.
+
+```
+@property
+def attribute(self): #console object.attribute, it doesn't need of ()
+    return self.__attribute
+@attribute.setter
+def attribute(self, new_attribute):
+    object.__attribute = new_attribute
+```
+
+> `private method:` created to be executed only within the class.
+
+```
+def __private_method(self, var):
+    #block of private code
+```
+
+> `static method (class):` are methods that do not depend on a reference, generally aimed at generalization.
+
+```
+@staticmethod
+def static_method():
+    return "value"
+```
+
+> `class attribute:` is a variable that is associated with the class as a whole, rather than with individual instances of that class.
+
+```
+class Class:
+static_attribute = "value"
+```
+
+<h3>Heritage</h3>
+
+👑 Allows you to create child classes that inherit attributes and methods from a parent class.
+
+```
+class Father:
+    def __init__(self, var):
+        self.__attribute = var.title() #capitalize the first letter
+    #@property
+    #... father's attributes
+class Daughter(Father): #Daughter inherits from father
+    def __init__(self, var):
+    #... daughter's attributes
+```
+
+> `__` or `_:` In Python, the underscores "__" are transformed into another variable and this is called ___name mangling___.
+
+
