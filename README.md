@@ -172,7 +172,10 @@ class Daughter(Father): #Daughter inherits from father
 > `__` or `_` → in Python, the underscores "__" are transformed into another variable and this is called ___name mangling___.
 
 <img src="https://github.com/Goestoso/Python/assets/132786474/2144a292-4de9-4950-9571-6b878f5768e9" alt="Heritage" align="center">
+
 <br>
+<br>
+
 > `super():` function that allows you to call a method in the parent class, helping to avoid code duplication.
 
 ```
@@ -206,6 +209,8 @@ son_and_daughter = [obj1, obj2]
 ```
 
 <img src= "https://github.com/Goestoso/Python/assets/132786474/ba579334-dc12-4a36-9c77-d9881fc5cf42" alt="Polymorphism" align="center">
+
+<br>
 <br>
 
 - In Python, method overriding is ___implicit___, just define a method with the same name in the child class that it will replace in the parent class.
