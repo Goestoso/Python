@@ -56,6 +56,28 @@ def __init__(self, name, age):
     self.age = age #atribute
 ```
 
+<h3>Dunder methods (double underscore methods)</h3>
+
+→ Refers to special methods in python and are defined like this: `__method__()`.
+
+> `__str__():` responsible for representing the object in textual form (string).
+
+```
+def __str__(self):
+    return 'str'
+```
+
+> `__repr__():` used to show a representation that helps in debugging or logging a code.
+
+```
+list = [1, 2, 3, 4, 5]
+print(repr(list)) # [1,2,3,4,5]
+#print how the object is represented
+```
+
+➡️ <a href="https://www.geeksforgeeks.org/dunder-magic-methods-python/" target="_blank">More about dunder methods...</a>
+
+
 <h2>Python UML</h2>
 
 <img src="https://github.com/Goestoso/Python/assets/132786474/da1961ac-9e68-4f7d-bdb5-d53760519d40" alt="UML Python" width="1000" height="500">
@@ -253,24 +275,3 @@ print(animal_sound(cat))  # Saída: Meow!
 print(animal_sound(cow))  # Saída: Moo!
 
 ```
-
-<h3>Dunder methods (double underscore methods)</h3>
-
-→ Refers to special methods in python and are defined like this: `__method__()`.
-
-> `__str__():` responsible for representing the object in textual form (string).
-
-```
-def __str__(self):
-    return 'str'
-```
-
-> `__repr__():` used to show a representation that helps in debugging or logging a code.
-
-```
-list = [1, 2, 3, 4, 5]
-print(repr(list)) # [1,2,3,4,5]
-#print how the object is represented
-```
-
-➡️ <a href="https://www.geeksforgeeks.org/dunder-magic-methods-python/" target="_blank">More about dunder methods...</a>
