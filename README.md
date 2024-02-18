@@ -52,7 +52,32 @@ book1 = Book() #creating the object calling the class
 
 ```
 def __init__(self, name, age):
-    self.name = name #atrribute
-    self.age = age #atrribute
+    self.name = name #atribute
+    self.age = age #atribute
 ```
 
+<h2>Python UML</h2>
+
+<img src="https://github.com/Goestoso/Python/assets/132786474/da1961ac-9e68-4f7d-bdb5-d53760519d40" alt="UML Python" width="1000" height="500">
+
+> `None:` used to dereference an object.
+> <br>
+>object = None
+
+- It is possible to access the _object_ attributes using `.`
+
+```
+object.attribute1 #acessing the attribute
+```
+
+<h3>Class Methods</h3>
+
+→ They are functions associated with objects.
+
+```
+object.method() #acessing the class method
+```
+
+- When creating methods in a class, the first parameter must be `self`;
+- Python automatically ___passes the instance___ as the method's first argument;
+ 
