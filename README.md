@@ -70,6 +70,22 @@ def __init__(self, name, age):
 object.attribute1 #acessing the attribute
 ```
 
+<h3>SOLID</h3>
+
+→ There are some properties or principles that were defined by Robert C. Martin to create a _class_:
+
+- `S:` Single responsibility principle;
+- `O:` Open/closed principle;
+- `L:` Liskov substitution principle;
+- `I:` Interface segregation principle;
+- `D:` Dependency inversion principle;
+
+> `S:` just a responsibility per class. <br>
+> `O:` classes open for extension but closed for modification. <br>
+> `L:` derived classes must be replaceable by their base classes, in other words, if S is a subclass of T, then objects of type T can be replaced by objects of type S without breaking the expected behavior of the program. <br>
+> `I:` interfaces must be specific to the clients that use them, promoting code cohesion. <br>
+> `D:` high-level modules should not depend on low-level modules, they should both depend on abstractions.
+
 <h3>Class Methods</h3>
 
 → They are functions associated with objects.
@@ -80,4 +96,26 @@ object.method() #acessing the class method
 
 - When creating methods in a class, the first parameter must be `self`;
 - Python automatically ___passes the instance___ as the method's first argument;
+
+ <h3>Encapsulation</h3>
  
+🔐 Encapsulation in Python is not as strict as it does not use specific keywords.
+
+🧐 It is achieved through ___conventions___.
+
+ - A `_` indicates that the method is "protected",that is, it should not be accessed outside the class or subclass, but it is ___possible___.
+
+```
+self._attribute_protected
+#_Class_attribute_protected
+```
+
+- Two `__` indicates that the attribute or method is "private", python internally renames the name to avoid collisions.
+
+```
+self.__attribute_private
+#_Class__attribute_private
+```
+
+> `@property:` in python it is not common to use getters and setters, however you can use the _property_ to change this behavior.
+
