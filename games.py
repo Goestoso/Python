@@ -8,7 +8,7 @@ def choose_game():
     print("*******Escolha o seu game!*******")
     print("*********************************")
 
-    print("(1) Forca (2) Adivinhação (3) Memória")
+    print("(1) Forca (2) Adivinhação (3) Memória (demais números) Encerrar")
 
     jogo = int(input("Qual jogo? "))
 
@@ -24,6 +24,7 @@ def choose_game():
         print("Jogando memória")
         memory.play()
         print("Jogo da memória foi encerrado.")
+    else: print("Encerrando... Até a próxima!")
 
 if (__name__ == "__main__"): #seta a variável de execução __name__ para verificar se o arquivo é executado diretamente
     choose_game()
