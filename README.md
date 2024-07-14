@@ -156,7 +156,7 @@ def __repr__(self, object):
 
 ```
 def __eq__(self, object):
-    if self == object: return True # if the compared object is the same as the current instance
+    if self is object: return True # if the compared object is the same as the current instance
     if isistance(object, self.__class__): # checks if the object is from the same instance of the class
         return self.attribute1 == object.attribute1 and self.attribute2 == object.attribute2
     return False
@@ -492,3 +492,119 @@ except:
     err = format_exc() # converts the stack trace to a str
     print(err)
 ```
+
+<h2>🧱 Abstract data types</h2>
+
+→ An `Abstract Data Type (ADT)` is a mathematical model that encapsulates data and functions to manipulate it.
+
+- A TAD has two main parts:
+> `Stored Data`: Represents the values ​​that we want to manipulate (can be stored in _variables_, _vectors_, _pointers_, etc.).
+> <br>
+> `Functions (Operations)`: Implement procedures that act on the encapsulated data. These functions are called _operations_, _methods_, or _services_.
+
+- `Simple (Primitive) Data Types`:
+> Simple types (such as `int`, `float`, `str`, and `bool`) represent individual values.
+> <br>
+> They abstract away underlying implementation details (like the binary representation of an integer) and allow us to work with these values ​​in a convenient way.
+> <br>
+> For example, when we use an `int`, we ___don't need to worry about how it is stored in memory; we just use their values___.
+
+- `Abstraction`:
+> Abstraction is the process of ___simplifying and hiding complex details___, allowing us to focus only on the relevant aspects.
+> <br>
+> Both `primitives` and `ADTs` use abstraction to make code more readable and manageable.
+
+<h3>🔡🔢 Arrays</h3>
+
+→ Array is a data structure that ___statically___ stores a collection (`vectors` or `arrays`) of elements of the same type, these elements can be _numbers_, _strings_, _objects_ or _any other data type_.
+
+> 🔢 The `NumPy` module is a powerful tool for working with vectors, matrices and numerical calculations in Python.
+
+- To install `NumPy` you can use `pip` package manager:
+```
+pip install numpy
+```
+- Then, in your code, import `NumPy`:
+```
+import numpy as np # using alias to simplify the name 'numpy'
+```
+<h4>Vectors (__One-Dimensional Arrays__)</h4> 
+
+> Example of a vector with 5 positions (remembering that ___arrays always start at position 0___):
+
+| 0 | 1 | 2 | 3 | 4 |
+|---|---|---|---|---|
+
+- Vectors are one-dimensional arrays, that is, they have only one dimension. They are an ordered sequence of elements of the same type.
+- Generally, vectors are used to store a collection of related values. For example, a vector might contain a student's grades in different subjects or the prices of products in a catalog.
+- Vectors have a single index to access their elements. The first element usually has index 0, the second has index 1, and so on.
+
+```
+vector = np.empty(shape=5, dtype=int) # creating an empty int vector with size 5
+vector = np.array([1,2,3,4,5]) # creating a vector with given numbers
+vector = np.zeros(5) # creating a vector with five zeros
+vector = np.ones(5) # creating a vector with five ones
+vector[4] = 0 # accessing and changing the value of a specific index of the vector
+for element in vector: # iterating the vector
+    print(element)
+```
+<h4>Matrices (__Multi-Dimensional__ Arrays)</h4>
+
+> Example of a matrix with 3 rows and 5 columns (remembering that ___arrays always start at position 0___):
+
+| 0 | 1 | 2 | 3 | 4 |
+|---|---|---|---|---|
+| 1 | 0 | 0 | 0 | 0 |
+| 2 | 0 | 0 | 0 | 0 |
+
+- Matrices are two-dimensional or multi-dimensional arrays, that is, they have two or more dimensions: rows, columns, depths, etc.
+- A matrix is ​​essentially a rectangular table of elements, where each element is located in a specific position defined by indices (in two-dimensional arrays: row and column, three-dimensional arrays: row, column and depth, etc.).
+- Matrices are often used to represent tabular data such as spreadsheets, images (where each pixel is an element of the matrix), or systems of linear equations.
+
+```
+matrix = np.empty(shape=(3,5), dtype=int) # creating an empty int 3x5 matrix
+matrix = np.zeros((3,3)) # creating a 3x3 matrix with zeros
+matrix = np.ones((4,4)) # creating a 4x4 matrix with ones
+matrix = np.array([[1,2,3],[4,5,6]]) # creating a 2x3 matrix with given numbers
+matrix[1,2] = 0 # accessing and changing the value of a specific row and column of the matrix
+for row in matrix: # iterating the matrix (simple way)
+    for element in row:
+        print(element)
+squares = matrix ** 2
+print(squares) # using vectorization to calculate the square of elements
+for element in np.nditer(squares): # iterating the matrix (other simple way)
+    print(element)
+for (row, column), element in np.ndenumerate(matrix): # iterating the matrix (by indeces)
+    print(f"row ({linha}, column {coluna}): {element}")
+reshape = np.reshape(squares, (3,2)) # by changing the shape of the matrix, the total number of elements must be the same in both the old (2x3) and new matrix(3x2)!
+print(reshape)
+print(np.transpose(matrix)) # returns transposed of the matrix
+concatenate_matrix = np.concatenate(matrix, squares, 0) # concatenates matrices along the specified axis, 0 for rows and 1 for columns
+print(concatenate_matrix)
+new_sizes = np.pad(matrix, pad_width=1, mode='constant', constant_values=0) # adding 1 unit padding to all edges of the matrix with constant values
+print(new_sizes)
+new_sizes = np.pad(matrix, pad_width=2, mode='symmetric') # adding 2-unit symmetrical padding
+print(new_sizes)
+new_sizes = np.pad(matrix, pad_width=1, mode='edge') # adding replicated padding (repeating edge values) of 1 unit
+for i in range(new_sizes.shape[0]): # iterating the matrix (using shape to obtain the rows of the matrix)
+    for j in range(new_sizes.shape[1]): # iterating the matrix (using shape to obtain the columns of the matrix)
+        print(matrix[i,j])
+for index in np.ndindex(concatenate_matrix.shape): # Getting all possible indexes in the array
+    row, column = index # index returns a tuple of two values ​​and here its capturing the first in row variable and the second in column variable
+    element = concatenate_matrix[row, column]
+    print(f"Row ({row}, column {column}): {element}")
+```
+
+<h3>🔡↔️🔢 Dynamic Arrays</h3>
+
+→ A `dynamic array` is a _data structure_ that __can grow or shrink__ as needed during program execution.
+- The central idea is that, ___unlike static arrays (with a fixed size)___, ___dynamic arrays can be resized___ to accommodate more elements or free up space when necessary.
+
+💡 Type `list` is considered a dynamic array!
+> We can add elements using the `append()` method or the concatenation (`+`) operation.
+> <br>
+> We can remove elements using the `remove()` method or the `del` keyword.
+> <br>
+> The `list` size can grow or shrink as needed.
+
+- ⚠️ It is possible to create custom dynamic arrays by building classes that implement the functions of the `NumPy` module!
