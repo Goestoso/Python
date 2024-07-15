@@ -390,13 +390,20 @@ def school_average(self, grades:List[float]) -> float: # indicates that the meth
     return sum(grades) / len(grades)
 ```
 
-- 👁️ __Curiosity:__ in Python, methods can return an amount of __n__ elements (the return comes in tuple format).
+<details>
+
+<summary>👁️ Curiosity</summary>
+
+- In Python, methods can return an amount of __n__ elements (the return comes in tuple format).
 
 ```
 from typing import Any, Tuple
 def show_properties(self, variable: Any) -> Tuple[str, int]: # indicates that the method must receive any value and that it will return a str and an int
     return repr(variable), len(variable)
 ```
+
+</details>
+
 
 <h2>❌ Exceptions</h2>
 
@@ -608,3 +615,55 @@ for index in np.ndindex(concatenate_matrix.shape): # Getting all possible indexe
 > The `list` size can grow or shrink as needed.
 
 - ⚠️ It is possible to create custom dynamic arrays by building classes that implement the functions of the `NumPy` module!
+
+> 👉 Using the ___dunder methods___ `__iter__`, `__next__`, `__getitem__`, `__setitem__`and `__len__` it is possible to create your own dinamic array, like this [custom array example](https://github.com/Goestoso/Python/blob/oop/my_array.py).
+
+<details>
+
+<summary>⏯️ yield and next ➡️</summary>
+
+- `yield` is a _keyword_ in Python that is used in a function to turn that function into a ___generator___.
+- Instead of returning a value and ending the function's execution, `yield` returns a value and "pauses" the function's execution, maintaining its state so that it can continue where it left off the next time it is called.
+
+> `return` vs `yield`:
+- `return`: when a function reaches a return statement, ___it returns a value and ends execution___.
+- `yield`: when a function reaches a yield statement, ___it returns a value and "pauses" execution___. The next time the generator is iterated, execution continues where it left off after the yield.
+
+> `yield` use example:
+
+```
+def __init__(self, capacity=None):
+        self.__lastPos = -1
+        self.__data = np.empty(shape=capacity, dtype=int) if capacity else np.empty(shape=10, dtype=int)
+
+def __iter__(self):
+        for i in range(self.__lastPos + 1):
+            yield self.__data[i]
+```
+- `next` is a ___built-in function___ and a ___dunder method___ in Python that retrieves the next item from an iterator.
+- When you use next on an iterator, it returns the next item in the sequence until there are no more items, at which point it raises the StopIteration exception.
+
+> `yield` vs `next`:
+- `yield`: when you need a simple and efficient iterator. It is ideal for most iteration cases and is easier to implement and understand.
+- `next`: when you need finer control over iteration, such as in cases where the state of the iterator needs to be preserved between iterations in a complex way. It is useful in advanced situations where `yield` does not provide the necessary flexibility.
+
+> `next` use example:
+
+```
+    def __init__(self, my_array):
+            self._my_array = my_array
+            self._index = 0
+
+    def __iter__(self):
+            return self
+
+    def __next__(self):
+        if self._index <= self._my_array.__lastPos:
+            result = self._my_array.__data[self._index]
+            self._index += 1
+            return result
+        else:
+            raise StopIteration
+```
+
+</details>
