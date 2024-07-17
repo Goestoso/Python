@@ -1,15 +1,16 @@
 import numpy as np
-from random import randint
+from random import randint, shuffle
 from typing import Iterable, Tuple, List
+from collections.abc import MutableSequence # to declare the type of a dynamic array
 
-def union(arrays:Tuple['MyArray', ...]):
+def join(arrays:Tuple['MyArray', ...]) -> 'MyArray':
     if isinstance(arrays, tuple):
         union = MyArray()
         for array in arrays:
             union.extend(array)
         return union
 
-class MyArray:
+class MyArray(MutableSequence): # Abstract class inheritance
     
     DEFAULT_CAPACITY = 10
     __lastPos = -1
@@ -53,7 +54,8 @@ class MyArray:
             self.__index += 1
             return element
         else:
-            raise StopIteration
+            self.__index = 0
+            raise StopIteration(f"StopIteration: this is the end of MyArray, there are no more positions beyond index {self.__lastPos}")
     
     def __getitem__(self, index:int|slice):
         if isinstance(index, int) and index <= self.__lastPos:
@@ -81,7 +83,7 @@ class MyArray:
         if isinstance(value, int):
             return tuple([MyArray(data=self) for _ in range(value)])
                  
-    def __truediv__(self, value):
+    def __truediv__(self, value:int):
         if isinstance(value, int):
             if value > 0 and value <= len(self):
                 sub_length = len(self) // value
@@ -249,7 +251,7 @@ class MyArray:
     def remove(self, e:int) -> bool:
         if self.is_empty(): return False
         for i in range(self.__lastPos):
-            if self.__data[i] == e: 
+            if self.__data[i] == e:
                 temp = np.empty(shape=len(self.__data), dtype=int)
                 if i == self.__lastPos: 
                     self.pop()
@@ -268,6 +270,26 @@ class MyArray:
                 return True
         return False
     
+    def remove_duplicates(self):
+        # important to shuffle the array to avoid OverflowError, because in already ordered arrays, the number of recursive calls will be equal to the number of elements in the array, and if it has many elements, it may generate the error
+        shuffle(self)
+        self.quick_sort()
+        next(self) # getting the first element
+        relements = MyArray()
+        try:
+            for i in range(len(self)):
+                if self[i] == next(self): # comparing whether the current element is equal to the next
+                    if relements.count(self[i]) == 0: # type: ignore
+                        relements.append(self[i]) # type: ignore
+        finally:
+            for index in range(len(relements)):
+                relement:int = relements[index] # type: ignore
+                qt = self.count(relement)
+                while(qt > 1):
+                    self.remove(relement)
+                    qt -= 1
+            return # just to terminate the execution of the try:finally block
+    
     def extend(self, array:Iterable[int]):
         if isinstance(array, Iterable):
             for element in array:
@@ -276,8 +298,8 @@ class MyArray:
     def count(self, e:int) -> int:
         if self.is_empty(): return 0
         count = 0
-        for element in self.__data:
-            if element == e: count += 1
+        for i  in range(self.__len__()):
+            if self[i] == e: count += 1
         return count
     
     def index(self, e:int) -> int:
