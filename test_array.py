@@ -1,5 +1,5 @@
-from my_array import MyArray, union
-from time import time
+from my_array import MyArray, join, shuffle
+from time import time # to calculate the duration of sorting methods
 
 array = MyArray()
 array.fill_array_randomly()
@@ -43,7 +43,7 @@ print("Using the last slice:")
 last_array = arrays[len(arrays)-1]
 print(last_array)
 print("Joining the arrays:")
-print(union(arrays))
+print(join(arrays))
 array1 = MyArray()
 array1.extend([1,2,3,4,5,6,7,8,9,10])
 array2 = MyArray()
@@ -70,6 +70,26 @@ array = MyArray(5)
 array.extend([1,2,3,4,5])
 print(array)
 print(f"Reversed array: {reversed(array)}")
+print("Trying to remove the element 2...")
+array = reversed(array)
+array.remove(2) # type: ignore
+print(repr(array))
+print("Shuffling the array...")
+shuffle(array) # type: ignore
+print(array)
+array = MyArray(50)
+array.fill_array_randomly()
+array.quick_sort()
+print(array)
+array.remove_duplicates()
+print("Showing the elements of MyArray after remove_duplicates:")
+hasnext = True
+while(hasnext):
+    try:
+        print(next(array))
+    except StopIteration as e:
+        print(e)
+        hasnext = False
 big_array = MyArray(10000)
 print("Big array:")
 big_array.fill_array_randomly()
@@ -78,25 +98,31 @@ start = time()
 big_array.selection_sort()
 end = time()
 print(f"Duration: {end - start:.4f} secs.")
-big_array.fill_array_randomly()
+shuffle(big_array)
 print("Insertion sort:")
 start = time()
 big_array.insertion_sort()
 end = time()
 print(f"Duration: {end - start:.4f} secs.")
-big_array.fill_array_randomly()
+shuffle(big_array)
 print("Bubble sort:")
 start = time()
 big_array.bubble_sort()
 end = time()
 print(f"Duration: {end - start:.4f} secs.")
-big_array.fill_array_randomly()
+shuffle(big_array)
+valid = False
 print("Quick sort:")
-start = time()
-big_array.quick_sort()
-end = time()
-print(f"Duration: {end - start:.4f} secs.")
-big_array.fill_array_randomly()
+while(not valid):
+    try:
+        start = time()
+        big_array.quick_sort()
+        end = time()
+        print(f"Duration: {end - start:.4f} secs.")
+    except OverflowError:
+        shuffle(big_array)
+    else: valid = True # if an OverFlowError does not occur  
+shuffle(big_array)
 print("Merge sort:")
 start = time()
 big_array.merge_sort()
