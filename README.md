@@ -442,7 +442,7 @@ class MyException(Exception):
 
 <h3>🩺 Exception block</h3>
 
-→ `try-except:` is used to catch and handle exceptions.
+→ `try-except:` is used to catch and handle specific or generic exceptions.
 
 - It allows monitoring a block of code using `try` and catching possible exceptions using `except`.
 - `as:` to assign the textual output of the exception, the keyword as (alias) is used and, by convention, the letter `e`.
@@ -453,12 +453,32 @@ try:
 except Exception as e: # catching all exceptions
     print(e)
 ```
-> Optional blocks:
+→ `try-finally:` is used to ensure that a given piece of code is executed regardless of what happens inside the `try` block.
 
-- `else:` this block is _only executed if no error occurs in the `try` block_.
+```
+try:
+    # monitoring block
+finally: # ensuring that this block of code will be executed
+    # finally block
+```
+
 - `finally:` is _always executed_, regardless of whether errors have occurred or not.
 > `finally` blocks allow the completion of tasks.
 <br>
+
+> Optional block:
+
+- `else:` this block is _only executed if no error occurs in the `try` block_.
+> ___The `else` block depends on an `except` block to function___
+
+```
+try:
+    # monitoring block
+except Exception as e: # catching all exceptions
+    print(e)
+else: # if no exception is caught
+    print("Worked")
+```
 
 > General order of the exception handling block:
 
@@ -469,7 +489,7 @@ except:
     # except block
 else:
     # else block
-finnaly:
+finally:
     # finnaly block
 ```
 
@@ -535,7 +555,7 @@ pip install numpy
 ```
 import numpy as np # using alias to simplify the name 'numpy'
 ```
-<h4>Vectors (__One-Dimensional Arrays__)</h4> 
+<h4>Vectors (One-Dimensional Arrays)</h4> 
 
 > Example of a vector with 5 positions (remembering that ___arrays always start at position 0___):
 
@@ -555,7 +575,7 @@ vector[4] = 0 # accessing and changing the value of a specific index of the vect
 for element in vector: # iterating the vector
     print(element)
 ```
-<h4>Matrices (__Multi-Dimensional__ Arrays)</h4>
+<h4>Matrices (Multi-Dimensional Arrays)</h4>
 
 > Example of a matrix with 3 rows and 5 columns (remembering that ___arrays always start at position 0___):
 
