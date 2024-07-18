@@ -47,6 +47,21 @@ class Student:
 - variables allocated on the heap remain allocated until they are explicitly deallocated by the programmer and this allows data to persist beyond the scope of the function that created it.
 - allocating and deallocating memory on the heap is _slower_ compared to the stack due to the need to manage free memory.
   
+> ___General structure of object memory allocation:___
+
+<img src="https://github.com/Goestoso/Python/assets/132786474/7ef4b42f-2cb9-4054-8583-333e8c4f8c88" alt="UML Python" width="1000" height="500">
+
+- 🔋 `STACK:`
+- memory on the stack is allocated and deallocated __automatically__ (generally with function calls, variable declaration and replacement of variable values...);
+- when a function is called, the space needed for local variables is allocated on the stack, and when the function ends, this space is freed;
+- allocating and deallocating memory on the stack is very _fast_ because it only involves moving a pointer;
+<br>
+
+- 🗻 `HEAP:`
+- memory on the heap is allocated and deallocated __dinamically__ (not limited by the scope of a function, as in creating a new object with its attributes and methods);
+- variables allocated on the heap remain allocated until they are explicitly deallocated by the programmer and this allows data to persist beyond the scope of the function that created it.
+- allocating and deallocating memory on the heap is _slower_ compared to the stack due to the need to manage free memory.
+  
 <h2>Classes and Objects</h2>
 
 > `Class:` A class is like a template or a blueprint for creating _objects_.
@@ -62,6 +77,7 @@ book1 = Book() #creating the object calling the class
 #reference
 ```
 
+- `__init__:` special ___dunder method___ called ___constructor___ (executed automatically when a new object is created);
 - `__init__:` special ___dunder method___ called ___constructor___ (executed automatically when a new object is created);
 - `(self):` the _self_ attribute is used to refer to the current object;
 
@@ -132,19 +148,87 @@ class Person:
 
 > Class`.class_method()`
 
+> `None:` used to dereference an object.
+> <br>
+>object = None
+
+<h3>Instance Methods</h3>
+
+→ They are functions associated with objects.
+
+```
+object.method() #acessing the instance method
+```
+
+- When creating instance methods in a class, the first parameter must be `self`;
+- Python automatically ___passes the instance___ as the method's first argument;
+
+<h3>Static Methods</h3>
+
+> `static method:` are methods that do not depend on a object reference, generally aimed at generalization.
+
+```
+@staticmethod
+def static_method():
+    return "value"
+```
+
+- Static methods can be called using the _class reference_.
+
+> Class`.static_method()`
+
+<h3>Class Methods</h3>
+
+> `class attribute:` is a variable that is associated with the class as a whole, rather than with individual instances of that class.
+
+```
+class Class:
+class_attribute = "value"
+```
+
+> `class constant attribute:` variables whose values ​​must not be changed after initial assignment.
+
+```
+class Class:
+CONSTANT_ATTRIBUTE = "value"
+```
+
+> `class methods:` to access attributes, working in one's own class (receiving the class itself as the first argument).
+
+```
+class Person:
+    def __init__(self, name, year_of_birth):
+        self.name = name
+        self.year_of_birth = year_of_birth
+
+    @classmethod
+    def copy_person(cls, person): #cls is a convention for the class instance (1st argument)
+        return cls(person.name, person.year_of_birth) # calls the class constructor
+```
+- Class methods can also be called using the _class reference_.
+
+> Class`.class_method()`
+
 <h3>Dunder methods (double underscore methods)</h3>
 
 → Refers to special (magic) methods in python and are defined like this: `__method__()`.
+→ Refers to special (magic) methods in python and are defined like this: `__method__()`.
 
+> `__str__()`: responsible for representing the object for the end user in str format.
 > `__str__()`: responsible for representing the object for the end user in str format.
 
 ```
 def __str__(self):
     return 'value'
+    return 'value'
 ```
 
 > `__repr__()`: used to show a representation of the object that helps the programmer.
+> `__repr__()`: used to show a representation of the object that helps the programmer.
 
+```
+def __repr__(self, object):
+    return f"Class(attribute1={object.attribute1}, attribute2={object.attribute2)"
 ```
 def __repr__(self, object):
     return f"Class(attribute1={object.attribute1}, attribute2={object.attribute2)"
@@ -152,6 +236,48 @@ def __repr__(self, object):
 
 - It is possible to access the _object_ attributes using `.`
 
+> `__eq__()`: responsible for checking whether two objects are equal.
+
+```
+def __eq__(self, object):
+    if self is object: return True # if the compared object is the same as the current instance
+    if isistance(object, self.__class__): # checks if the object is from the same instance of the class
+        return self.attribute1 == object.attribute1 and self.attribute2 == object.attribute2
+    return False
+
+object = Class("value1", "value2")
+other = Class("value1", "value2")
+print(object == other) # True
+```
+
+> `__ne__()`: responsible for checking whether two objects are not equal.
+
+```
+def __ne__(self, other):
+        return not self.__eq__(other)
+object = Class("value1", "value2")
+other = Class("value2", "value1")
+print(object != other) # True
+```
+
+> `__lt__()`, `__le__()`, `__gt__()` and `__gt__()`: are comparison operators that allow us to evaluate relationships between values (`l`: less, `g`: greater, `e`: equal, `t`: than).
+
+```
+def __gt__(self, object): # the form of comparison is chosen by implementation
+    if len(self) > len(object):  
+        return True
+    elif  len(self) == len(object):
+        return self > object
+    return False
+
+object = Class("value")
+other = Class("other_value")
+print(other > object) # True
+```
+
+➡️ <a href="https://www.geeksforgeeks.org/dunder-magic-methods-python/" target="_blank">More about dunder methods...</a>
+
+<h2>SOLID</h2>
 > `__eq__()`: responsible for checking whether two objects are equal.
 
 ```
@@ -210,11 +336,13 @@ print(other > object) # True
 > `D:` high-level modules should not depend on low-level modules, they should both depend on abstractions.
 
  <h3>🔒 Encapsulation</h3>
+ <h3>🔒 Encapsulation</h3>
  
 🔐 Encapsulation in Python is not as strict as it does not use specific keywords.
 
 🧐 It is achieved through ___conventions___.
 
+ - A `_` indicates that the method is "protected", that is, it should not be accessed outside the class or subclass, but it is ___possible___.
  - A `_` indicates that the method is "protected", that is, it should not be accessed outside the class or subclass, but it is ___possible___.
 
 ```
@@ -230,8 +358,11 @@ self.__attribute_private
 ```
 
 > `protected method:` created to be executed only within the class and its subclasses.
+> `protected method:` created to be executed only within the class and its subclasses.
 
 ```
+def _protected_method(self, var):
+    #block of protected code
 def _protected_method(self, var):
     #block of protected code
 ```
@@ -258,8 +389,24 @@ def attribute(self): # object.attribute to access
 @attribute.setter #to modify
 def attribute(self, new_attribute): # object.attribute = "new value" to modifiy
     object.__attribute = new_attribute
+🔏 `__` or `_` → in Python, the underscores "__" are transformed into another variable and this is called ___name mangling___.
+
+<h4>Properties (🔑Getters and Setters🛠️)</h4>
+
+→ Methods that give access are named _properties_, indicating to Python the intention to have access to the attribute or to modify it.
+
+> `@property:` in python it is not common to use getters and setters, however you can use the _property_ to change this behavior.
+
+```
+@property #to access
+def attribute(self): # object.attribute to access
+    return self.__attribute
+@attribute.setter #to modify
+def attribute(self, new_attribute): # object.attribute = "new value" to modifiy
+    object.__attribute = new_attribute
 ```
 
+<h3>👑 Heritage</h3>
 <h3>👑 Heritage</h3>
 
 👑 Allows you to create child classes that inherit attributes and methods from a parent class.
@@ -303,7 +450,18 @@ class Daugther(Father, Mother): # multiple inheritance
     # Daughter inherits from father and mother
     pass
 ```
+class Father:
+    # father attributes and methods
+    pass
+class Mother:
+    # mother attributes and methods
+    pass
+class Daugther(Father, Mother): # multiple inheritance
+    # Daughter inherits from father and mother
+    pass
+```
 
+<h3>🔂 Polymorphism</h3>
 <h3>🔂 Polymorphism</h3>
 
 🔁 Allows objects of different classes to be treated uniformly.
@@ -318,6 +476,9 @@ class Daugther(Father, Mother): # multiple inheritance
 <h4>📝 Overriding</h4>
 
 - In Python, method `overriding` is ___implicit___, just define a method with the same name in the child class that it will replace in the parent class.
+<h4>📝 Overriding</h4>
+
+- In Python, method `overriding` is ___implicit___, just define a method with the same name in the child class that it will replace in the parent class.
 
 > Father → def print_method(self):
 > <br>
@@ -329,12 +490,16 @@ class Daugther(Father, Mother): # multiple inheritance
 class Animal:
     def make_sound(self):
         return "Animal sound"
+        return "Animal sound"
 
+class Dog(Animal): 
+    def make_sound(self): #Overriding
 class Dog(Animal): 
     def make_sound(self): #Overriding
         return "Woof!"
 
 class Cat(Animal):
+    def make_sound(self): #Overriding
     def make_sound(self): #Overriding
         return "Meow!"
 
