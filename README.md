@@ -687,3 +687,68 @@ def __iter__(self):
 ```
 
 </details>
+
+<h3>🖇️Linked Lists</h3>
+
+→ It is a linear data structure consisting of a sequence of elements called `nodes`.
+
+> Nodes:
+
+```
+                 Double Node
++-------+      +-----------+      +-------+
+|  Prev |<-----|   Data    |----->|  Next |
++-------+      +-----------+      +-------+
+```
+
+- Each `node` contains two main components: ___Data___ and ___Pointer___.
+- ___Data___: the information _stored_ in the `node`.
+- ___Pointer___: or ___reference___, is a link to the ___next___ or ___previous___ `node` in the sequence.
+
+> Characteristics:
+
+- ___📥 Non-Contiguous in Memory___: unlike _arrays_ or _dynamic arrays_, the elements of a _linked list_ are not stored in contiguous memory locations, each node can be anywhere in memory, and the ___pointer___ connects these `nodes`.
+- ___🐛 Dynamic Size___: the size of a _linked list_ can grow or shrink as needed, without the need for reallocation or resizing as occurs in arrays.
+- ___🏗️ Ease of Insertion/Removal___: inserting or removing elements at the beginning or in the middle of a _linked list_ can be done efficiently, as it does not require moving the elements, just modifying the pointers.
+- ___➕ Benefits___: efficient insertions and removals plus dynamic memory usage.
+- ___➖ Disadvantages___: sequential access and memory overhead.
+
+> Types:
+
+- ___➡️ Singly Linked List___: each `node` points only to the ___next___ `node` in the sequence.
+
+```
+ ↪ +--------+     +--------+     +--------+     +--------+
+    | Node  |      | Node  |      | Node  |      | Node  |
+    +-------+      +-------+      +-------+      +-------+
+    |  Data |      |  Data |      |  Data |      |  Data |
+    +-------+      +-------+      +-------+      +-------+
+    |  Next |----->|  Next |----->|  Next |----->|  Next |-----> null
+    +-------+      +-------+      +-------+      +-------+
+```
+- ___↔️ Doubly Linked List___: each `node` contains two pointers, one to the ___next___ `node` and one to the ___previous___ `node`.
+
+```
+ ↪ +--------+      +--------+      +--------+      +--------+
+    | Node  |       | Node  |       | Node  |       | Node  |
+    +-------+       +-------+       +-------+       +-------+
+    |  Data |       |  Data |       |  Data |       |  Data |
+    +-------+       +-------+       +-------+       +-------+
+    |  Next |<----->|  Next |<----->|  Next |<----->|  Next |-----> null
+    +-------+       +-------+       +-------+       +-------+
+```
+- ___🛞 Circular Linked List___: in the circular _linked list_, ___the last `node` points to the first `node`___, forming a __cycle__.
+
+```
+   +--------+      +--------+      +--------+      +--------+
+    | Node  |       | Node  |       | Node  |       | Node  |
+    +-------+       +-------+       +-------+       +-------+
+    |  Data |       |  Data |       |  Data |       |  Data |
+    +-------+       +-------+       +-------+       +-------+
+    |  Next |<----->|  Next |<----->|  Next |<----->|  Next |
+    +-------+       +-------+       +-------+       +-------+
+       ^                                                 |
+       |                                                 v
+       +-------------------------------------------------+
+```
+
