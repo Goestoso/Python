@@ -1,6 +1,6 @@
 from typing import Iterable, Any
 
-def max(linked_list:'SinglyLinkedList|DoublyLinkedList') -> object:
+def max(linked_list:'SinglyLinkedList|DoublyLinkedList|CircularLinkedList') -> object:
     if linked_list.empty: return None
     if isinstance(linked_list, SinglyLinkedList):
         if len(linked_list) == 0: return linked_list.first
@@ -20,9 +20,18 @@ def max(linked_list:'SinglyLinkedList|DoublyLinkedList') -> object:
                 greater = aux.info
             aux = aux.next
         return greater
+    elif isinstance(linked_list, CircularLinkedList):
+        if len(linked_list) == 0: return linked_list.head
+        aux = linked_list.head.next  # type: ignore
+        greater = linked_list.head.info # type: ignore
+        while(aux != linked_list.head):
+            if aux.info > greater: # type: ignore
+                greater = aux.info # type: ignore
+            aux = aux.next # type: ignore
+        return greater
 
 
-def min(linked_list:'SinglyLinkedList|DoublyLinkedList') -> object:
+def min(linked_list:'SinglyLinkedList|DoublyLinkedList|CircularLinkedList') -> object:
     if linked_list.empty: return None
     if isinstance(linked_list, SinglyLinkedList):
         if len(linked_list) == 0: return linked_list.first
@@ -41,6 +50,15 @@ def min(linked_list:'SinglyLinkedList|DoublyLinkedList') -> object:
             if aux.info < less: # type: ignore
                 less = aux.info
             aux = aux.next
+        return less
+    elif isinstance(linked_list, CircularLinkedList):
+        if len(linked_list) == 0: return linked_list.head
+        aux = linked_list.head.next  # type: ignore
+        less = linked_list.head.info # type: ignore
+        while(aux != linked_list.head):
+            if aux.info < less: # type: ignore
+                less = aux.info # type: ignore
+            aux = aux.next # type: ignore
         return less
 
 class Node:
@@ -105,13 +123,7 @@ class DoubleNode:
     def __repr__(self) -> str:
         return f"<-|{self.info}|->"
     
-    def __eq__(self, value: object) -> bool:
-        if value is self: return True
-        if isinstance(value, DoubleNode):
-            return self.info == value.info
-        return False
-    
-class SinglyLinkedList:
+class SinglyLinkedList: # whithout tail or last node, just first/head node
     
     @property
     def first(self) -> Node|None:
@@ -295,8 +307,8 @@ class DoublyLinkedList:
         return self.__head
     
     @property
-    def tale(self):
-        return self.__tale
+    def tail(self):
+        return self.__tail
     
     @property
     def empty(self) -> bool:
@@ -320,7 +332,7 @@ class DoublyLinkedList:
         if linked_list.empty: raise TypeError("TypeError: Nonetype does not have middle node, the DoublyLinkedList is empty!")
         elif len(linked_list) == 1: return linked_list.head.info # type: ignore
         else: 
-            n, p = linked_list.head, linked_list.tale # type: ignore
+            n, p = linked_list.head, linked_list.tail # type: ignore
             if len(linked_list)%2==0:
                 for _ in range(len(linked_list)//2):
                     n = n.next # type: ignore
@@ -338,7 +350,7 @@ class DoublyLinkedList:
         if linked_list.empty: raise TypeError("TypeError: Nonetype does not have middle node, the DoublyLinkedList is empty!")
         elif len(linked_list) == 1: return 0 # type: ignore
         else: 
-            n, p = linked_list.head, linked_list.tale # type: ignore
+            n, p = linked_list.head, linked_list.tail # type: ignore
             if len(linked_list)%2==0:
                 for i in range(len(linked_list)//2):
                     n = n.next # type: ignore
@@ -362,7 +374,7 @@ class DoublyLinkedList:
             
     def __init__(self, iterable:Iterable[Any]|None=None) -> None:
         self.__head: DoubleNode|None = None
-        self.__tale: DoubleNode|None = None
+        self.__tail: DoubleNode|None = None
         if iterable:
             for value in iterable:
                 self.append(value)
@@ -400,13 +412,13 @@ class DoublyLinkedList:
     
     def clear(self):
         self.__head = None
-        self.__tale = None
+        self.__tail = None
         
     def insert(self, value:object):
         aux = DoubleNode(value)
         if self.empty:
             self.__head = aux
-            self.__tale = aux
+            self.__tail = aux
         else:
             aux.next = self.head
             self.head.previous = aux # type: ignore
@@ -416,24 +428,24 @@ class DoublyLinkedList:
         aux = DoubleNode(value)
         if self.empty:
             self.__head = aux
-            self.__tale = aux
+            self.__tail = aux
         else:
-            self.tale.next = aux # type: ignore
-            aux.previous = self.tale
-            self.__tale = aux
+            self.tail.next = aux # type: ignore
+            aux.previous = self.tail
+            self.__tail = aux
     
     def remove(self):
         if self.empty: raise TypeError("TypeError: cannot remove None, the DoublyLinkedList is empty!")
         temp = self.head.info # type: ignore
         self.__head = self.head.next # type: ignore
-        if self.empty: self.__tale = None
+        if self.empty: self.__tail = None
         return temp
     
     def pop(self):
         if self.empty: raise TypeError("TypeError: cannot pop None, the DoublyLinkedList is empty!")
-        temp = self.tale.info # type: ignore
-        self.__tale = self.tale.previous # type: ignore
-        self.__tale.next = None # type: ignore
+        temp = self.tail.info # type: ignore
+        self.__tail = self.tail.previous # type: ignore
+        self.__tail.next = None # type: ignore
         if self.empty: self.__head = None
         return temp
     
@@ -459,7 +471,7 @@ class DoublyLinkedList:
     def last_index(self, value:object) -> int:
         if self.empty: return -1
         index = len(self)-1
-        aux = self.tale
+        aux = self.tail
         while(aux != None):
             if aux.info == value: return index
             aux = aux.previous
@@ -471,9 +483,9 @@ class DoublyLinkedList:
         elif index < 0: raise IndexError(f"IndexError: index {index} is negative, there aren't negative indexes!")
         elif index >= len(self): raise IndexError(f"IndexError: index {index} is out of bounds of DoublyLinkedList of lenght {len(self)}")
         elif index == 0: return self.head.info # type: ignore
-        elif index == len(self)-1: return self.tale.info # type: ignore
+        elif index == len(self)-1: return self.tail.info # type: ignore
         elif index >= len(self) // 2: # using an algorithm that doesn't need to scan the list much
-            aux, i = self.tale.previous, len(self)-2 # type: ignore
+            aux, i = self.tail.previous, len(self)-2 # type: ignore
             while(i>=0):
                 if i == index: return aux.info # type: ignore
                 aux = aux.previous # type: ignore
@@ -488,7 +500,7 @@ class DoublyLinkedList:
         if self.empty: raise TypeError("TypeError: cannot replace Nonetype value, the DoublyLinkedList is empty!")
         elif index < 0: raise IndexError(f"IndexError: index {index} is negative, there aren't negative indexes!")
         elif index >= len(self): raise IndexError(f"IndexError: index {index} is out of bounds of DoublyLinkedList of lenght {len(self)}")
-        aux, i = self.tale, len(self)-1
+        aux, i = self.tail, len(self)-1
         if index >= len(self) // 2: 
             while(i>=0):
                 if i == index: 
@@ -517,7 +529,7 @@ class DoublyLinkedList:
         elif index == len(self)-1: return self.pop()
         elif index >= len(self): raise IndexError(f"IndexError: index {index} is out of bounds of SinglyLinkedList of lenght {len(self)}")
         elif index >= len(self) // 2:
-            aux, i = self.tale, len(self)-1 # type: ignore
+            aux, i = self.tail, len(self)-1 # type: ignore
             while(aux != None):
                 if i == index:
                     temp = aux.info 
@@ -543,18 +555,18 @@ class DoublyLinkedList:
         elif index == 0: return self.insert(value)
         elif index == len(self): return self.append(value)
         elif index >= len(self) // 2:
-            new, aux, i = DoubleNode(value), self.tale, len(self)-1 # type: ignore
+            new, aux, i = DoubleNode(value), self.tail, len(self)-1 # type: ignore
             if len(self)==2: 
                 self.head.next = new  # type: ignore
-                self.tale.previous = new # type: ignore
-                new.next = self.tale
+                self.tail.previous = new # type: ignore
+                new.next = self.tail
                 new.previous = self.head 
                 return
             if index == len(self)-1: 
-                self.tale.previous.next = new # type: ignore
-                new.next = self.tale
-                new.previous = self.tale.previous # type: ignore
-                self.tale.previous = new # type: ignore
+                self.tail.previous.next = new # type: ignore
+                new.next = self.tail
+                new.previous = self.tail.previous # type: ignore
+                self.tail.previous = new # type: ignore
                 return
             while(i>=0):
                 if i == index:
@@ -571,3 +583,339 @@ class DoublyLinkedList:
                     new.previous = aux.previous # type: ignore
                     aux = new
                     return
+                
+class CircularLinkedList:
+    
+    __instances = 0
+    
+    @property
+    def instances(self):
+        return self.__instances
+    
+    @property
+    def head(self):
+        return self.__head
+    
+    @property
+    def tail(self):
+        return self.__tail
+    
+    @property
+    def empty(self) -> bool:
+        return self.head == None
+    
+    @staticmethod # @staticmethod is a class method to the current class instance # @classmethod is a class method to all instances of class SinglyLinkedList
+    def join(linked_list:'CircularLinkedList', other_linked_list:'CircularLinkedList'):
+        union = CircularLinkedList()
+        current = linked_list.head
+        union.append(current.info) # type: ignore
+        current = current.next # type: ignore
+        while current != linked_list.head:
+            union.append(current.info) # type: ignore
+            current = current.next # type: ignore
+        current = other_linked_list.head
+        union.append(current.info) # type: ignore
+        current = current.next # type: ignore
+        while current != other_linked_list.head:
+            union.append(current.info) # type: ignore
+            current = current.next # type: ignore
+        return union
+    
+    @staticmethod
+    def middle_value(linked_list:'CircularLinkedList'):
+        if linked_list.empty: raise TypeError("TypeError: Nonetype does not have middle node, the DoublyLinkedList is empty!")
+        elif len(linked_list) == 1: return linked_list.head.info # type: ignore
+        else: 
+            n, p = linked_list.head, linked_list.tail # type: ignore
+            if len(linked_list)%2==0:
+                for _ in range(len(linked_list)//2):
+                    n = n.next # type: ignore
+                    p = p.previous # type: ignore
+                return p.info, n.info # type: ignore
+            else: 
+                for _ in range(len(linked_list)):
+                    n = n.next # type: ignore
+                    p = p.previous # type: ignore
+                    if n == p: # type: ignore
+                        return n.info # type: ignore
+                    
+    @staticmethod
+    def middle_index(linked_list:'CircularLinkedList'):
+        if linked_list.empty: raise TypeError("TypeError: Nonetype does not have middle node, the DoublyLinkedList is empty!")
+        elif len(linked_list) == 1: return 0 # type: ignore
+        else: 
+            n, p = linked_list.head, linked_list.tail # type: ignore
+            if len(linked_list)%2==0:
+                for i in range(len(linked_list)//2):
+                    n = n.next # type: ignore
+                    p = p.previous # type: ignore
+                return i, i+1 # type: ignore
+            else: 
+                for i in range(len(linked_list)):
+                    n = n.next # type: ignore
+                    p = p.previous # type: ignore
+                    if n == p: # type: ignore
+                        return i+1 # type: ignore
+    
+    @staticmethod
+    def copy(linked_list:'CircularLinkedList'):
+        if linked_list:
+            copy, aux = CircularLinkedList(), linked_list.head
+            copy.append(aux.info) # type: ignore
+            aux = aux.next # type: ignore
+            while(aux!=linked_list.head):
+                copy.append(aux.info) # type: ignore
+                aux = aux.next # type: ignore
+            return copy
+        
+    @staticmethod
+    def to_list(linked_list:'CircularLinkedList') -> list[object]:
+        array = list()
+        if linked_list:
+            aux = linked_list.head
+            array.append(aux.info) # type: ignore
+            aux = aux.next # type: ignore
+            while(aux != linked_list.head):
+                array.append(aux.info) # type: ignore
+                aux = aux.next # type: ignore
+        return array
+    
+    @classmethod
+    def __increment_instances_count(cls): # this increments the value for each new instance created
+        cls.__instances += 1
+        
+    def __init__(self, iterable:Iterable[Any]|None=None) -> None:
+        self.__head: DoubleNode|None = None
+        self.__tail: DoubleNode|None = None
+        self.__increment_instances_count()
+        if iterable:
+            for value in iterable:
+                self.append(value)
+    
+    def __len__(self):
+        if self.empty: return 0
+        aux, count = self.head, 1
+        aux = aux.next  # type: ignore
+        while(aux != self.head):  # type: ignore
+            aux = aux.next  # type: ignore
+            count +=1
+        return count
+    
+    def __str__(self) -> str:
+        temp:str = "Circular Linked List: "
+        if self.empty: return temp + 'empty'
+        temp += "○ "
+        aux = self.head
+        temp += str(aux)
+        aux = aux.next  # type: ignore
+        while(aux != self.head):
+            temp += str(aux)
+            aux = aux.next  # type: ignore
+        temp += " ○"
+        temp += "\n                      |"
+        for _ in range(22,len(temp)-26):
+            temp += "_"
+        temp += "|"
+        return temp
+    
+    def __repr__(self) -> str:
+        temp:str = "(tail) "
+        if self.empty: return temp + 'None'
+        aux = self.head
+        temp += str(aux)
+        aux = aux.next  # type: ignore
+        while(aux != self.head):
+            temp += str(aux)
+            aux = aux.next  # type: ignore
+        temp += " (head)"
+        return temp
+    
+    def clear(self):
+        self.__head = None
+        self.__tail = None
+        
+    def insert(self, value:object):
+        aux = DoubleNode(value)
+        if self.empty:
+            self.__head = aux
+            self.__tail = aux
+        else:
+            aux.next = self.head
+            aux.previous = self.tail
+            self.head.previous = aux # type: ignore
+            self.__head = aux
+            self.tail.next = self.head  # type: ignore
+    
+    def append(self, value:object):
+        aux = DoubleNode(value)
+        if self.empty:
+            self.__head = aux
+            self.__tail = aux
+        else:
+            aux.previous = self.tail
+            aux.next = self.head
+            self.tail.next = aux # type: ignore
+            self.__tail = aux
+            self.head.previous = self.tail # type: ignore
+    
+    def remove(self) -> object:
+        if self.empty: raise TypeError("TypeError: cannot remove None, the CircularLinkedList is empty!")
+        temp = self.head.info # type: ignore
+        self.__head = self.head.next # type: ignore
+        self.head.previous = self.tail # type: ignore
+        self.tail.next = self.head # type: ignore
+        if self.empty: self.__tail = None
+        return temp
+    
+    def pop(self) -> object:
+        if self.empty: raise TypeError("TypeError: cannot remove None, the CircularLinkedList is empty!")
+        temp = self.tail.info # type: ignore
+        self.__tail = self.tail.previous # type: ignore
+        self.tail.next = self.head # type: ignore
+        self.head.previous = self.tail # type: ignore
+        if self.empty: self.__head = None
+        return temp
+    
+    def count(self, value:object) -> int:
+        if self.empty: return 0
+        count = 1
+        aux = self.head
+        aux = aux.next # type: ignore
+        while(aux != self.head):
+            if aux.info == value: count += 1 # type: ignore
+            aux = aux.next # type: ignore
+        return count     
+    
+    def index(self, value:object) -> int:
+        if self.empty: return -1
+        if value == self.head.info: return 0 # type: ignore
+        index = 1
+        aux = self.head
+        aux = aux.next  # type: ignore
+        while(aux != self.head):
+            if aux.info == value: return index  # type: ignore
+            aux = aux.next  # type: ignore
+            index += 1
+        return -1
+    
+    def last_index(self, value:object) -> int:
+        if self.empty: return -1
+        if self.tail.info == value: return len(self)-1 # type: ignore
+        index = len(self)-2
+        aux = self.tail
+        aux = aux.previous # type: ignore
+        while(aux != self.tail): 
+            if aux.info == value: return index # type: ignore
+            aux = aux.previous # type: ignore
+            index -= 1
+        return -1
+    
+    def value(self, index:int) -> object:
+        if self.empty: raise IndexError(f"IndexError: index {index} is out of bounds of DoublyLinkedList of length {len(self)}")
+        elif index < 0: raise IndexError(f"IndexError: index {index} is negative, there aren't negative indexes!")
+        elif index >= len(self): raise IndexError(f"IndexError: index {index} is out of bounds of DoublyLinkedList of lenght {len(self)}")
+        elif index == 0: return self.head.info # type: ignore
+        elif index == len(self)-1: return self.tail.info # type: ignore
+        elif index >= len(self) // 2: # using an algorithm that doesn't need to scan the list much
+            aux, i = self.tail.previous, len(self)-2 # type: ignore
+            while(i>=0):
+                if i == index: return aux.info # type: ignore
+                aux = aux.previous # type: ignore
+                i -= 1
+        else:
+            aux = self.head.next # type: ignore
+            for i in range(1, index):
+                if i == index: return aux.info # type: ignore
+                aux = aux.next # type: ignore
+
+    def replace_value(self, index:int, new_value:object):
+        if self.empty: raise TypeError("TypeError: cannot replace Nonetype value, the DoublyLinkedList is empty!")
+        elif index < 0: raise IndexError(f"IndexError: index {index} is negative, there aren't negative indexes!")
+        elif index >= len(self): raise IndexError(f"IndexError: index {index} is out of bounds of DoublyLinkedList of lenght {len(self)}")
+        aux, i = self.tail, len(self)-1
+        if index >= len(self) // 2: 
+            while(i>=0):
+                if i == index: 
+                    aux.info = new_value # type: ignore
+                    return
+                aux = aux.previous # type: ignore
+                i -= 1 
+        else:
+            for i in range(index):
+                if i == index:
+                    aux.info = new_value # type: ignore
+                    return
+                aux = aux.next # type: ignore
+    
+    def replace_all(self, old_value:object, new_value:object):
+        if self.empty: raise TypeError("TypeError: cannot replace Nonetype value, the DoublyLinkedList is empty!")
+        if self.head.info == old_value: self.head.info = new_value # type: ignore
+        aux = self.head
+        aux = aux.next # type: ignore
+        while(aux!=self.head):
+            if aux.info == old_value: aux.info = new_value # type: ignore
+            aux = aux.next # type: ignore
+    
+    def remove_index(self, index:int) -> object:
+        if self.empty: raise IndexError(f"IndexError: index {index} does not exist, SinglyLinkedList is empty!")
+        elif index < 0: raise IndexError(f"IndexError: index {index} is negative, there aren't negative indexes!")
+        elif index == 0: return self.remove()
+        elif index == len(self)-1: return self.pop()
+        elif index >= len(self): raise IndexError(f"IndexError: index {index} is out of bounds of SinglyLinkedList of lenght {len(self)}")
+        elif index >= len(self) // 2:
+            aux, i = self.tail.previous, len(self)-2 # type: ignore
+            while(i>=0):
+                if i == index:
+                    temp = aux.info # type: ignore 
+                    aux.previous.next = aux.next # type: ignore
+                    aux.next.previous = aux.previous # type: ignore
+                    return temp
+                aux = aux.previous # type: ignore
+                i -= 1
+        else: 
+            aux = self.head.next # type: ignore
+            for i in range(1,index):
+                if i == index:
+                    temp = aux.info # type: ignore
+                    aux.previous.next = aux.next# type: ignore
+                    aux.next.previous = aux.previous # type: ignore
+                    return temp
+                aux = aux.next # type: ignore
+    
+    def insert_index(self, index:int, value:object):
+        if self.empty: raise IndexError(f"IndexError: index {index} does not exist, SinglyLinkedList is empty!")
+        elif index < 0: raise IndexError(f"IndexError: index {index} is negative, there aren't negative indexes!")
+        elif index > len(self): raise IndexError(f"IndexError: index {index} is out of bounds of SinglyLinkedList of length {len(self)}")
+        elif index == 0: return self.insert(value)
+        elif index == len(self): return self.append(value)
+        elif index >= len(self) // 2:
+            new, aux, i = DoubleNode(value), self.tail, len(self)-1 # type: ignore
+            if len(self)==2: 
+                self.head.next = new  # type: ignore
+                self.tail.previous = new # type: ignore
+                new.next = self.tail
+                new.previous = self.head 
+                return
+            if index == len(self)-1: 
+                self.tail.previous.next = new # type: ignore
+                new.next = self.tail
+                new.previous = self.tail.previous # type: ignore
+                self.tail.previous = new # type: ignore
+                return
+            while(i>=0):
+                if i == index:
+                    aux.previous.next = new # type: ignore
+                    new.next = aux # type: ignore
+                    new.previous = aux.previous # type: ignore
+                    return
+                i -= 1
+        else: 
+            new, aux = DoubleNode(value), self.head # type: ignore
+            for i in range(index):
+                if i == index:
+                    new.next = aux.next # type: ignore
+                    new.previous = aux.previous # type: ignore
+                    aux = new
+                    return
+    
+    
