@@ -67,8 +67,8 @@ book1 = Book() #creating the object calling the class
 
 ```
 def __init__(self, name, age):
-    self.name = name #atribute
-    self.age = age #atribute
+    self.name = name # instance attribute
+    self.age = age # instance attribute
 ```
 
 > `None:` used to dereference an object.
@@ -80,10 +80,16 @@ def __init__(self, name, age):
 → They are functions associated with objects.
 
 ```
-object.method() #acessing the instance method
+value = object.method() # acessing the instance method
 ```
 
 - When creating instance methods in a class, the first parameter must be `self`;
+
+```
+def method(self):
+    return f"Hello {self.name}, you are using an instance method."
+```
+
 - Python automatically ___passes the instance___ as the method's first argument;
 
 <h3>Static Methods</h3>
@@ -109,24 +115,30 @@ class Class:
 class_attribute = "value"
 ```
 
-> `class constant attribute:` variables whose values ​​must not be changed after initial assignment.
+> `class constant attribute:` attributes whose values ​​must not be changed after initial assignment.
 
 ```
 class Class:
-CONSTANT_ATTRIBUTE = "value"
+    CONSTANT_ATTRIBUTE = "value"
 ```
 
-> `class methods:` to access attributes, working in one's own class (receiving the class itself as the first argument).
+> `class methods:` to access class attributes, working in one's own class (receiving the class itself as the first argument).
 
 ```
 class Person:
+    list_people = list() # class attribute
     def __init__(self, name, year_of_birth):
         self.name = name
         self.year_of_birth = year_of_birth
+        Person.list_people.append(self) # add the current instance to the list of people
 
     @classmethod
-    def copy_person(cls, person): #cls is a convention for the class instance (1st argument)
-        return cls(person.name, person.year_of_birth) # calls the class constructor
+    def show_people(cls): #cls is a convention for the class instance (1st argument)
+        return "\n".join(f"{str(person.name)}, str(person.year_of_birth)" for person in cls.list_people)
+
+    @classmethod
+    def copy_person(cls, person): 
+        return cls(person.name, person.year_of_birth) # calls the class constructor and create a new instance
 ```
 - Class methods can also be called using the _class reference_.
 
@@ -751,4 +763,58 @@ def __iter__(self):
        |                                                 v
        +-------------------------------------------------+
 ```
+
+<h3>👥FIFO</h3>
+
+→ A `FIFO` (___First In, First Out___), or simply ___queue___, is a data structure where __the first element to be inserted is the first to be removed__.
+
+> Characteristics:
+
+- ___🔢 Processing Order___: Elements are processed in the order in which they were inserted. The first element to be inserted (the "first in") is the first to be removed (the "first out").
+
+- ___🏗️ Insertion and Removal___: Insertion of elements is done at the end of the queue and removal is done at the beginning of the queue.
+
+- ___🔁 No Rollback___: Once an element is removed from the queue, it cannot be reclaimed. The order of elements cannot be reversed within the default queue.
+
+> ↔️ Main Operations:
+
+- ___Enqueue___: Add an element to the end of the queue.
+- ___Dequeue___: Remove the element from the front of the queue.
+- ___Front___: Access the element at the front of the queue without removing it.
+- ___Rear___: Access the element at the rear of the queue without removing it.
+- ___Check if it is empty (is_empty)___: Check if the queue contains elements.
+- ___Size___: Get the number of elements in the queue.
+- ___Sequential Access___: Elements are accessed in sequence, without the possibility of directly accessing an element in the middle of the queue (as in an `array` or `list`).
+
+> ⚙️ Structure:
+
+```
+🖇️ Linked List Structure:
+    +--------+      +--------+      +--------+      +--------+
+    |  Node  | ---->|  Node  | ---->|  Node  | ---->|  Node  |
+    +--------+      +--------+      +--------+      +--------+
+    |  Data  |      |  Data  |      |  Data  |      |  Data  |
+    +--------+      +--------+      +--------+      +--------+
+    |  Next  | ---->|  Next  | ---->|  Next  | ---->|  NULL  |
+    +--------+      +--------+      +--------+      +--------+
+       ^                                                 ^
+       |                                                 |
+     Front                                              Rear
+
+Enqueue: Add a node at the Rear
+Dequeue: Remove a node from the Front
+
+🔢 Array Structure:
+   +---------------------+ 
+   |[Data|Data|Data|Data]| 
+   +---------------------+
+      ^               ^            
+      |               |                                 
+    Front            Rear
+
+Enqueue: Add an element at the Rear
+Dequeue: Remove an element from the Front                                
+```
+
+- A ___queue___ can be implemented with both `arrays` and `linked lists`, both approaches have their advantages and disadvantages depending on the prevailing context and operations.
 
