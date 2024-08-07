@@ -700,7 +700,7 @@ def __iter__(self):
 
 </details>
 
-<h3>🖇️Linked Lists</h3>
+<h3>🖇️ Linked Lists</h3>
 
 → It is a linear data structure consisting of a sequence of elements called `nodes`.
 
@@ -764,7 +764,7 @@ def __iter__(self):
        +-------------------------------------------------+
 ```
 
-<h3>👥FIFO</h3>
+<h3>👥 FIFO</h3>
 
 → A `FIFO` (___First In, First Out___), or simply ___queue___, is a data structure where __the first element to be inserted is the first to be removed__.
 
