@@ -436,6 +436,11 @@ class DoublyLinkedList:
     
     def remove(self):
         if self.empty: raise TypeError("TypeError: cannot remove None, the DoublyLinkedList is empty!")
+        if not self.head.next: # type: ignore 
+            temp = self.head.info # type: ignore 
+            self.__head = None
+            self.__tail = None
+            return temp
         temp = self.head.info # type: ignore
         self.__head = self.head.next # type: ignore
         if self.empty: self.__tail = None
@@ -443,6 +448,11 @@ class DoublyLinkedList:
     
     def pop(self):
         if self.empty: raise TypeError("TypeError: cannot pop None, the DoublyLinkedList is empty!")
+        if not self.tail.previous: # type: ignore 
+            temp = self.tail.info # type: ignore 
+            self.__head = None
+            self.__tail = None
+            return temp
         temp = self.tail.info # type: ignore
         self.__tail = self.tail.previous # type: ignore
         self.__tail.next = None # type: ignore
@@ -760,20 +770,28 @@ class CircularLinkedList:
     
     def remove(self) -> object:
         if self.empty: raise TypeError("TypeError: cannot remove None, the CircularLinkedList is empty!")
+        if self.head == self.tail: # type: ignore 
+            temp = self.head.info # type: ignore 
+            self.__head = None
+            self.__tail = None
+            return temp
         temp = self.head.info # type: ignore
         self.__head = self.head.next # type: ignore
         self.head.previous = self.tail # type: ignore
         self.tail.next = self.head # type: ignore
-        if self.empty: self.__tail = None
         return temp
     
     def pop(self) -> object:
         if self.empty: raise TypeError("TypeError: cannot remove None, the CircularLinkedList is empty!")
+        if self.tail == self.head: # type: ignore 
+            temp = self.tail.info # type: ignore 
+            self.__head = None
+            self.__tail = None
+            return temp
         temp = self.tail.info # type: ignore
         self.__tail = self.tail.previous # type: ignore
         self.tail.next = self.head # type: ignore
         self.head.previous = self.tail # type: ignore
-        if self.empty: self.__head = None
         return temp
     
     def count(self, value:object) -> int:
