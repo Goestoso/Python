@@ -818,3 +818,54 @@ Dequeue: Remove an element from the Front
 
 - A ___queue___ can be implemented with both `arrays` and `linked lists`, both approaches have their advantages and disadvantages depending on the prevailing context and operations.
 
+<h3>🔋 LIFO</h3>
+
+→ `LIFO` (___Last In, First Out___), or ___stack___, is a data structure where __the last element to be inserted is the first to be removed__.
+
+> Characteristics:
+
+- ___🔢 Processing Order___: The last element added to the stack is the first to be removed (Last In, First Out).
+- ___🔐 Restricted Access___: Stack elements can only be added or removed from the top.
+- ___🔁 No Rollback___: Once an element is removed from the stack, it cannot be directly recovered except by pushing it back onto the stack.
+
+> Main Operations:
+
+- ___Push___: Add an element to the top of the stack.
+- ___Pop___: Remove the top element from the stack.
+- ___Peek/Top___: Access the top element of the stack without removing it.
+- ___Bottom___: Access the bottom element of the stack without removing it.
+- ___Check if it is empty (is_empty)___: Check if the stack is empty.
+- ___Size___: Return the number of elements in the stack.
+- ___Sequential Access___: Elements are accessed in sequence, without the possibility of directly accessing an element in the middle of the stack (as in an `array` or `list`).
+
+> ⚙️ Structure:
+
+```
+🖇️ Linked List Structure:
+    +--------+      +--------+      +--------+      +--------+
+    |  Node  | ---->|  Node  | ---->|  Node  | ---->|  Node  |
+    +--------+      +--------+      +--------+      +--------+
+    |  Data  |      |  Data  |      |  Data  |      |  Data  |
+    +--------+      +--------+      +--------+      +--------+
+    |  Next  | ---->|  Next  | ---->|  Next  | ---->|  NULL  |
+    +--------+      +--------+      +--------+      +--------+
+       ^                                                 ^
+       |                                                 |
+      Bottom                                            Top
+
+Push: Add a node at the Top
+Pop: Remove a node from the Top
+
+🔢 Array Structure:
+   +---------------------+ 
+   |[Data|Data|Data|Data]| 
+   +---------------------+
+      ^               ^            
+      |               |                                 
+     Bottom          Top
+
+Push: Add an element at the Top
+Pop: Remove an element from the Top                                
+```
+
+- A ___stack___ can be implemented with both `arrays` and `linked lists`, both approaches have their advantages and disadvantages depending on the prevailing context and operations.
