@@ -404,7 +404,7 @@ def school_average(self, grades:List[float]) -> float: # indicates that the meth
 
 <details>
 
-<summary>👁️ Curiosity</summary>
+<summary>👁️‍🗨️ Curiosity</summary>
 
 - In Python, methods can return an amount of __n__ elements (the return comes in tuple format).
 
@@ -869,3 +869,145 @@ Pop: Remove an element from the Top
 ```
 
 - A ___stack___ can be implemented with both `arrays` and `linked lists`, both approaches have their advantages and disadvantages depending on the prevailing context and operations.
+
+<h3>🔁 Recursion</h3>
+
+→ `Recursion` is a programming technique where ___a function is called repeatedly until it reaches a base condition___, which interrupts the calling cycle.
+
+> ➗ Divide and Conquer ✖️:
+
+→ `Recursion` is a powerful tool that can simplify the solution of complex problems by breaking them down into smaller, more manageable subproblems.
+
+> 🤔 What is Recursion?
+
+→ In simple terms, `recursion` is a function that calls itself. For recursion to work correctly, it is necessary to define two fundamental parts:
+
+- ___🦶 Base Condition___: The condition that stops recursion, preventing the function from being called indefinitely. Without a base condition, the code would result in infinite recursion and eventually a stack overflow error.
+
+- ___🔁 Recursive Call___: The part where the function calls itself, moving towards the base condition.
+
+> ⚙️  How does Recursion Work?
+
+→ When a ___recursive function___ is called, the following happens:
+
+- 🆕 Each recursive call creates a new execution context on the call stack, containing local variables and the current state of the function.
+- 🔄️ The function keeps calling itself until the base condition is satisfied.
+- 🛑 When the base condition is met, the recursive calls begin to "return" one by one, resolving from the innermost to the outermost call.
+
+> 🔎 When to Apply Recursion?
+
+→ `Recursion` is particularly useful in situations where a problem can be naturally divided into similar subproblems. Common examples include:
+
+- ___🔀 Divide and conquer problems___: As in sorting algorithms (_mergesort_, _quicksort_).
+- ___🔢 Problems that can be defined recursively___: How to calculate the _factorial_ of a number, _Fibonacci_, or _sums_ of numbers.
+- ___👑 Hierarchical data structures___: Like `trees` and `graphs`, where each _subtree_ is a complete _tree_.
+- ___🧩 State Exploration___: As in _maze_ or _puzzle_ solutions.
+
+> ➕ Advantages of Recursion:
+
+- ___👁️ Clarity and Simplicity___: For problems that are naturally recursive, the recursive solution may be more intuitive and easier to understand.
+- ___➗ Natural Division of the Problem___: Some problems, such as those involving __hierarchical structures__ (`trees`, `graphs`), are more easily solved with recursion.
+
+> ➖ Disadvantages of Recursion:
+
+- ___💾 Memory Usage___: Each recursive call adds a new entry to the call stack, which can lead to a stack overflow error if the recursion depth is too large.
+- ___⏩ Efficiency___: Recursion can be less efficient than iterative solutions, especially if many recursive calls repeat calculations (as in the Fibonacci sequence example without optimizations).
+
+> ❌ When to Avoid Recursion?
+
+- ___⬇️ Deep Recursion___: If the number of recursive calls is very large, it may be more efficient to use an iterative approach to avoid __stack overflow__ (known as the `RecursionError exception`).
+- ___➿ Excessive Repetition___: If recursion leads to an excessive number of repeated calculations, it may be necessary to optimize with techniques such as memoization (storing results of previous calculations).
+
+> 🤼 Recursion versus Iteration:
+
+→ `Recursion` and `iteration` are two approaches to solving repetitive problems. Some situations may be more naturally resolved with recursion, while others may be better suited to iteration. Sometimes a recursive solution can be easier to write and understand, but an iterative solution can be more efficient in terms of performance and memory usage.
+
+> 📝 Example:
+
+- 🔋 Call Stack in Recursion:
+
+```
+def factorial(n):
+    if n == 0:
+        return 1
+    else:
+        return n * factorial(n - 1)
+
+"""
+Case fatorial(5):
+
+factorial(5)
+    └── factorial(4)
+            └── factorial(3)
+                    └── factorial(2)
+                            └── factorial(1)
+                                    └── factorial(0) = 1
+                            ┌── return 1 * 1 = 1
+                    ┌── return 2 * 1 = 2
+            ┌── return 3 * 2 = 6
+    ┌── return 4 * 6 = 24
+┌── return 5 * 24 = 120
+
+"""
+```
+
+- 🌳 Call Tree in Recursion:
+
+```
+def fibonacci(n):
+    if n == 0:  # Caso base 1
+        return 0
+    elif n == 1:  # Caso base 2
+        return 1
+    else:
+        return fibonacci(n - 1) + fibonacci(n - 2)  # Chamada recursiva
+
+"""
+Case fibonacci(5):
+
+fibonacci(5)
+├── fibonacci(4)
+│   ├── fibonacci(3)
+│   │   ├── fibonacci(2)
+│   │   │   ├── fibonacci(1) = 1
+│   │   │   └── fibonacci(0) = 0
+│   │   └── fibonacci(1) = 1
+│   └── fibonacci(2)
+│       ├── fibonacci(1) = 1
+│       └── fibonacci(0) = 0
+└── fibonacci(3)
+    ├── fibonacci(2)
+    │   ├── fibonacci(1) = 1
+    │   └── fibonacci(0) = 0
+    └── fibonacci(1) = 1
+"""
+```
+
+
+<details>
+
+<summary>👁️‍🗨️ Callback Function ✖️ Recursive Function</summary>
+
+→  `Recursion` and `callback` functions are distinct concepts, but ___they both involve executing functions within other functions___.
+
+> ⬇️ Self-reference versus Delegation ⬆️:
+
+- `Recursion`: The function calls itself.
+- `Callback`: A function is passed to and called by another function.
+
+> 💡Purpose:
+
+- `Recursion`: Used to solve problems that can be divided into smaller subproblems of the same type.
+- `Callback`: Used to modularize code, create control flow or deal with asynchronous programming.
+
+> ⚙️ Execution Flow:
+
+- `Recursion`: It involves a series of calls on the stack until the base condition is reached.
+- `Callback`: The function is called when an event or condition is met.
+  
+> 🔎 Common Usage:
+
+- `Recursion`: Applied in algorithms such as tree search, sorting, etc.
+- `Callback`: Used in events, data manipulation, and asynchronous programming.
+
+</details>
