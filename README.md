@@ -704,7 +704,7 @@ def __iter__(self):
 
 → It is a linear data structure consisting of a sequence of elements called `nodes`.
 
-> Nodes:
+> 🪢 Nodes:
 
 ```
                  Double Node
@@ -782,7 +782,7 @@ def __iter__(self):
 - ___Dequeue___: Remove the element from the front of the queue.
 - ___Front___: Access the element at the front of the queue without removing it.
 - ___Rear___: Access the element at the rear of the queue without removing it.
-- ___Check if it is empty (is_empty)___: Check if the queue contains elements.
+- ___Check if it is empty___: Check if the queue contains elements.
 - ___Size___: Get the number of elements in the queue.
 - ___Sequential Access___: Elements are accessed in sequence, without the possibility of directly accessing an element in the middle of the queue (as in an `array` or `list`).
 
@@ -834,7 +834,7 @@ Dequeue: Remove an element from the Front
 - ___Pop___: Remove the top element from the stack.
 - ___Peek/Top___: Access the top element of the stack without removing it.
 - ___Bottom___: Access the bottom element of the stack without removing it.
-- ___Check if it is empty (is_empty)___: Check if the stack is empty.
+- ___Check if it is empty___: Check if the stack is empty.
 - ___Size___: Return the number of elements in the stack.
 - ___Sequential Access___: Elements are accessed in sequence, without the possibility of directly accessing an element in the middle of the stack (as in an `array` or `list`).
 
@@ -1011,3 +1011,159 @@ fibonacci(5)
 - `Callback`: Used in events, data manipulation, and asynchronous programming.
 
 </details>
+
+<h3>🌳 Tree</h3>
+
+→ `Tree` is a finite set of one or more `nodes`.
+
+⚠️ Not to be confused with `graphs`, as these consist of a set of nodes (or vertices) and edges that connect pairs of nodes. 
+
+> ___Every tree is a graph, but not every graph is a tree!___
+
+* `Tree:`
+
+```
+        [A]
+       / | \
+     [B] [C] [D]
+    / \      / \
+  [E] [F]  [G] [H]
+```
+
+* `Graph:`
+
+```
+     [1] ----- [2]
+      | \       |
+      |  \      |
+      |   \     |
+     [3]   \   [4]
+      |     \   |
+      |      \  |
+      |       \ |
+     [5] ----- [6]
+
+```
+> Characteristics:
+
+___🫚 Degree of a node___: is the number of subtrees of the node. <br>
+___🪵 Degree of a tree___: is the maximum degree between the nodes in the tree. <br>
+___🍃 Leaves of a node X___: are the roots of the subtrees of that node. In this case _X_ is the __Father__ of his __children__. <br>
+___📍 Level of a node___: the root of the tree is said to be at level zero and if a node is at level _k_, its children are at level _k + 1_. <br>
+___🏋️‍♂️ Height or depth of a tree___: is the maximum level of the nodes in the tree. <br>
+___👴 Ancestors of a node___: are all nodes along the path from the root to the node. <br>
+___🏕️ Forest___: set of disjoint trees. <br>
+___🚶‍➡️ Path___: a sequence of distinct nodes _v1_,_v2_,...,_vk_, such that it always exists between consecutive nodes (i.e., between _v1_ and _v2_, between _v2_ and _v3_, ..., _v(k-1)_ and _vk_) the relationship "is a child of" or "is a father of" is called a ___path in the tree___. <br>
+___📐 Path Length___: a path between _k_ vertices is obtained by the sequence of _k - 1_ pairs of vertices. In this case, _k - 1_ is the ___path length___.
+
+<h4>2️⃣ Binary Tree</h4>
+
+→ Tree in which each `node` has at most two __children__, referred to as ___left child___ and ___right child___.
+
+> ⚙️ Structure:
+
+```
+       [1]
+      /   \
+    [2]   [3]
+   /  \   /  \
+ [4] [5] [6] [7]
+```
+
+> 🪢 Node behavior:
+
+```
+              Node
+ +-------++-----------++-------+
+ |  Left ||   Info    || Right |
+ +-------++-----------++-------+
+    /                       \
+   /                         \
+  °                           °
+
+Info(or key): The value stored in the node.
+Left: Reference to the subtree to the left of the node.
+Right: Reference to the subtree to the right of the node.
+```
+
+> Main Operations:
+
+- ___Inseertion___: If the node value is entered by less than the current node value, the new node is placed on the left, or if the value is greater, the new node is placed on the right. This process continues recursively until the correct location for the node is found.
+- ___Search___: It starts at the root and compares the value to be searched with the value of the current node, if the value is smaller, the search continues to the left; if it is larger, continue to the right. The process continues until the value is found or there are no more nodes to traverse.
+- ___Removal___: Removing a node in a binary tree has three main cases: <br>
+1️⃣ - _Leaf node (no children)_: The node is simply removed. <br>
+2️⃣ - _Node with one child_: The node to be removed is replaced by its only child. <br>
+3️⃣ - _Node with two children_: In this case, the node is replaced by the smallest node in the right subtree (the successor) or the largest node in the left subtree (the predecessor), and the replacement node is removed from its original position.
+- ___Find Min/Max___: To find the minimum value in a binary search tree (BST), just follow the pointers to the left until you find the last node, to find the maximum value, just follow the pointers to the right until the end.
+- ___Check if it is empty___: Check if the binary tree is empty, if the root is `None`, the tree is empty.
+
+> 🔀 Routes:
+
+* `Pre-order:` <br>
+1️⃣ - Visit the root. <br>
+2️⃣ - The left subtree is traversed in previous order. <br>
+3️⃣ - The right subtree is traversed in previous order.
+
+* `In order:` <br>
+1️⃣ - The left subtree is traversed in symmetric order. <br>
+2️⃣ - Visit the root. <br>
+3️⃣ - The right subtree is traversed in symmetric order.
+
+* `Post-order:` <br>
+1️⃣ - Traverse the left subtree in later order. <br>
+2️⃣ - Traverse the right subtree in later order. <br>
+3️⃣ - Visit the root.
+
+```
+# Pre-order example:
+def to_string_pre_order(self):
+    if self.is_empty():
+        return "empty tree"
+    return self._to_string_pre_order(self.root)
+
+def _to_string_pre_order(self, current):
+    if current is None:
+        return ""
+    return (str(current) + " " + 
+            self._to_string_pre_order(current.get_left()) + 
+            self._to_string_pre_order(current.get_right()))
+
+# In order example:
+def to_string_in_order(self):
+        if self.is_empty():
+            return "empty tree"
+        return self._to_string_in_order(self.root)
+
+    def _to_string_in_order(self, current):
+        if current is None:
+            return ""
+        return (self._to_string_in_order(current.get_left()) +
+                str(current) + " " +
+                self._to_string_in_order(current.get_right()))
+
+# Post-order example:
+def to_string_post_order(self):
+    if self.is_empty():
+        return "empty tree"
+    return self._to_string_post_order(self.root)
+
+def _to_string_post_order(self, current):
+    if current is None:
+        return ""
+    return (self._to_string_post_order(current.get_left()) + 
+            self._to_string_post_order(current.get_right()) + 
+            str(current) + " ")
+```
+
+> ⏳ Time Complexity (O)
+
+→ In _search_, _insertion_ and _removal_ operations:
+
+* ✅ `Best case:` _O(log₂n)_ <br>
+📈 When the tree is balanced, at each step _half of the remaining nodes are eliminated_.
+
+* ⚖️ `Average case:` _O(log₂n)_ <br>
+📊 On average, a reasonably balanced tree is assumed, especially with _randomization_ or _readjustment_ techniques.
+
+* ❌ `Worst case:` _O(n)_ <br>
+📉 When a tree ___degenerates___, each operation may require time proportional to the number of elements, as in a linked list.
