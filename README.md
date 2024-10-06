@@ -1197,12 +1197,12 @@ def optimized_hash(key, table_size):
 
 > ⚙️ Structure:
 
-- 🔐 `Key and Value`: The hash table stores `key-value` pairs. The `key` is used to uniquely identify each entry, while the value is the information associated with that `key`.
-- 🟰 `Hash function`: To quickly find the index at which a value will be stored, a `hash function` is used. This function transforms the `key` into a number (usually a numeric index) that indicates the position in the table where the value will be stored. The `hash function` must be ___deterministic___, that is, for the same key, it will always return the same value.
-- 🛗 `Buckets`: The table is divided into _n_ positions (where n is the size of the array). Each `bucket` can store one value or, in case of `collisions`, multiple values ​​associated with different `keys`.
-- 💥 `Collisions`: Even with a good `hash function`, two or more `keys` can result in the same index (called a `collision`). There are techniques for resolving `collisions`, such as: <br>
-1️⃣ - ___Chaining___: Each table position stores a list of entries. If two `keys` collide, both are inserted into this list. <br>
-2️⃣ - ___Open addressing___: If there is a `collision`, the table searches for another available position to store the value (example: __linear probing__, which sequentially searches for the next free position).
+- 🔐 `Key and Value`: The hash table stores key-value pairs. The key is used to uniquely identify each entry, while the value is the information associated with that key.
+- 🟰 `Hash function`: To quickly find the index at which a value will be stored, a hash function is used. This function transforms the key into a number (usually a numeric index) that indicates the position in the table where the value will be stored. The hash function must be ___deterministic___, that is, for the same key, it will always return the same value.
+- 🛗 `Buckets`: The table is divided into _n_ positions (where n is the size of the array). Each bucket can store one value or, in case of collisions, multiple values ​​associated with different keys.
+- 💥 `Collisions`: Even with a good hash function, two or more keys can result in the same index (called a collision). There are techniques for resolving collisions, such as: <br>
+1️⃣ - ___Chaining___: Each table position stores a list of entries. If two keys collide, both are inserted into this list. <br>
+2️⃣ - ___Open addressing___: If there is a collision, the table searches for another available position to store the value (example: __linear probing__, which sequentially searches for the next free position).
 
 ```
 +-------+-------------------+
