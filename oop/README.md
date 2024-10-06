@@ -404,7 +404,7 @@ def school_average(self, grades:List[float]) -> float: # indicates that the meth
 
 <details>
 
-<summary>👁️ Curiosity</summary>
+<summary>👁️‍🗨️ Curiosity</summary>
 
 - In Python, methods can return an amount of __n__ elements (the return comes in tuple format).
 
@@ -704,7 +704,7 @@ def __iter__(self):
 
 → It is a linear data structure consisting of a sequence of elements called `nodes`.
 
-> Nodes:
+> 🪢 Nodes:
 
 ```
                  Double Node
@@ -782,7 +782,7 @@ def __iter__(self):
 - ___Dequeue___: Remove the element from the front of the queue.
 - ___Front___: Access the element at the front of the queue without removing it.
 - ___Rear___: Access the element at the rear of the queue without removing it.
-- ___Check if it is empty (is_empty)___: Check if the queue contains elements.
+- ___Check if it is empty___: Check if the queue contains elements.
 - ___Size___: Get the number of elements in the queue.
 - ___Sequential Access___: Elements are accessed in sequence, without the possibility of directly accessing an element in the middle of the queue (as in an `array` or `list`).
 
@@ -834,7 +834,7 @@ Dequeue: Remove an element from the Front
 - ___Pop___: Remove the top element from the stack.
 - ___Peek/Top___: Access the top element of the stack without removing it.
 - ___Bottom___: Access the bottom element of the stack without removing it.
-- ___Check if it is empty (is_empty)___: Check if the stack is empty.
+- ___Check if it is empty___: Check if the stack is empty.
 - ___Size___: Return the number of elements in the stack.
 - ___Sequential Access___: Elements are accessed in sequence, without the possibility of directly accessing an element in the middle of the stack (as in an `array` or `list`).
 
@@ -869,3 +869,372 @@ Pop: Remove an element from the Top
 ```
 
 - A ___stack___ can be implemented with both `arrays` and `linked lists`, both approaches have their advantages and disadvantages depending on the prevailing context and operations.
+
+<h3>🔁 Recursion</h3>
+
+→ `Recursion` is a programming technique where ___a function is called repeatedly until it reaches a base condition___, which interrupts the calling cycle.
+
+> ➗ Divide and Conquer ✖️:
+
+→ `Recursion` is a powerful tool that can simplify the solution of complex problems by breaking them down into smaller, more manageable subproblems.
+
+> 🤔 What is Recursion?
+
+→ In simple terms, `recursion` is a function that calls itself. For recursion to work correctly, it is necessary to define two fundamental parts:
+
+- ___🦶 Base Condition___: The condition that stops recursion, preventing the function from being called indefinitely. Without a base condition, the code would result in infinite recursion and eventually a stack overflow error.
+
+- ___🔁 Recursive Call___: The part where the function calls itself, moving towards the base condition.
+
+> ⚙️  How does Recursion Work?
+
+→ When a ___recursive function___ is called, the following happens:
+
+- 🆕 Each recursive call creates a new execution context on the call stack, containing local variables and the current state of the function.
+- 🔄️ The function keeps calling itself until the base condition is satisfied.
+- 🛑 When the base condition is met, the recursive calls begin to "return" one by one, resolving from the innermost to the outermost call.
+
+> 🔎 When to Apply Recursion?
+
+→ `Recursion` is particularly useful in situations where a problem can be naturally divided into similar subproblems. Common examples include:
+
+- ___🔀 Divide and conquer problems___: As in sorting algorithms (_mergesort_, _quicksort_).
+- ___🔢 Problems that can be defined recursively___: How to calculate the _factorial_ of a number, _Fibonacci_, or _sums_ of numbers.
+- ___👑 Hierarchical data structures___: Like `trees` and `graphs`, where each _subtree_ is a complete _tree_.
+- ___🧩 State Exploration___: As in _maze_ or _puzzle_ solutions.
+
+> ➕ Advantages of Recursion:
+
+- ___👁️ Clarity and Simplicity___: For problems that are naturally recursive, the recursive solution may be more intuitive and easier to understand.
+- ___➗ Natural Division of the Problem___: Some problems, such as those involving __hierarchical structures__ (`trees`, `graphs`), are more easily solved with recursion.
+
+> ➖ Disadvantages of Recursion:
+
+- ___💾 Memory Usage___: Each recursive call adds a new entry to the call stack, which can lead to a stack overflow error if the recursion depth is too large.
+- ___⏩ Efficiency___: Recursion can be less efficient than iterative solutions, especially if many recursive calls repeat calculations (as in the Fibonacci sequence example without optimizations).
+
+> ❌ When to Avoid Recursion?
+
+- ___⬇️ Deep Recursion___: If the number of recursive calls is very large, it may be more efficient to use an iterative approach to avoid __stack overflow__ (known as the `RecursionError exception`).
+- ___➿ Excessive Repetition___: If recursion leads to an excessive number of repeated calculations, it may be necessary to optimize with techniques such as memoization (storing results of previous calculations).
+
+> 🤼 Recursion versus Iteration:
+
+→ `Recursion` and `iteration` are two approaches to solving repetitive problems. Some situations may be more naturally resolved with recursion, while others may be better suited to iteration. Sometimes a recursive solution can be easier to write and understand, but an iterative solution can be more efficient in terms of performance and memory usage.
+
+> 📝 Example:
+
+- 🔋 Call Stack in Recursion:
+
+```
+def factorial(n):
+    if n == 0:
+        return 1
+    else:
+        return n * factorial(n - 1)
+
+"""
+Case fatorial(5):
+
+factorial(5)
+    └── factorial(4)
+            └── factorial(3)
+                    └── factorial(2)
+                            └── factorial(1)
+                                    └── factorial(0) = 1
+                            ┌── return 1 * 1 = 1
+                    ┌── return 2 * 1 = 2
+            ┌── return 3 * 2 = 6
+    ┌── return 4 * 6 = 24
+┌── return 5 * 24 = 120
+
+"""
+```
+
+- 🌳 Call Tree in Recursion:
+
+```
+def fibonacci(n):
+    if n == 0:  # Caso base 1
+        return 0
+    elif n == 1:  # Caso base 2
+        return 1
+    else:
+        return fibonacci(n - 1) + fibonacci(n - 2)  # Chamada recursiva
+
+"""
+Case fibonacci(5):
+
+fibonacci(5)
+├── fibonacci(4)
+│   ├── fibonacci(3)
+│   │   ├── fibonacci(2)
+│   │   │   ├── fibonacci(1) = 1
+│   │   │   └── fibonacci(0) = 0
+│   │   └── fibonacci(1) = 1
+│   └── fibonacci(2)
+│       ├── fibonacci(1) = 1
+│       └── fibonacci(0) = 0
+└── fibonacci(3)
+    ├── fibonacci(2)
+    │   ├── fibonacci(1) = 1
+    │   └── fibonacci(0) = 0
+    └── fibonacci(1) = 1
+"""
+```
+
+
+<details>
+
+<summary>👁️‍🗨️ Callback Function ✖️ Recursive Function</summary>
+
+→  `Recursion` and `callback` functions are distinct concepts, but ___they both involve executing functions within other functions___.
+
+> ⬇️ Self-reference versus Delegation ⬆️:
+
+- `Recursion`: The function calls itself.
+- `Callback`: A function is passed to and called by another function.
+
+> 💡Purpose:
+
+- `Recursion`: Used to solve problems that can be divided into smaller subproblems of the same type.
+- `Callback`: Used to modularize code, create control flow or deal with asynchronous programming.
+
+> ⚙️ Execution Flow:
+
+- `Recursion`: It involves a series of calls on the stack until the base condition is reached.
+- `Callback`: The function is called when an event or condition is met.
+  
+> 🔎 Common Usage:
+
+- `Recursion`: Applied in algorithms such as tree search, sorting, etc.
+- `Callback`: Used in events, data manipulation, and asynchronous programming.
+
+</details>
+
+<h3>🌳 Tree</h3>
+
+→ `Tree` is a finite set of one or more `nodes`.
+
+⚠️ Not to be confused with `graphs`, as these consist of a set of nodes (or vertices) and edges that connect pairs of nodes. 
+
+> ___Every tree is a graph, but not every graph is a tree!___
+
+* `Tree:`
+
+```
+        [A]
+       / | \
+     [B] [C] [D]
+    / \      / \
+  [E] [F]  [G] [H]
+```
+
+* `Graph:`
+
+```
+     [1] ----- [2]
+      | \       |
+      |  \      |
+      |   \     |
+     [3]   \   [4]
+      |     \   |
+      |      \  |
+      |       \ |
+     [5] ----- [6]
+
+```
+> Characteristics:
+
+___🫚 Degree of a node___: is the number of subtrees of the node. <br>
+___🪵 Degree of a tree___: is the maximum degree between the nodes in the tree. <br>
+___🍃 Leaves of a node X___: are the roots of the subtrees of that node. In this case _X_ is the __Father__ of his __children__. <br>
+___📍 Level of a node___: the root of the tree is said to be at level zero and if a node is at level _k_, its children are at level _k + 1_. <br>
+___🏋️‍♂️ Height or depth of a tree___: is the maximum level of the nodes in the tree. <br>
+___👴 Ancestors of a node___: are all nodes along the path from the root to the node. <br>
+___🏕️ Forest___: set of disjoint trees. <br>
+___🚶‍➡️ Path___: a sequence of distinct nodes _v1_,_v2_,...,_vk_, such that it always exists between consecutive nodes (i.e., between _v1_ and _v2_, between _v2_ and _v3_, ..., _v(k-1)_ and _vk_) the relationship "is a child of" or "is a father of" is called a ___path in the tree___. <br>
+___📐 Path Length___: a path between _k_ vertices is obtained by the sequence of _k - 1_ pairs of vertices. In this case, _k - 1_ is the ___path length___.
+
+<h4>2️⃣ Binary Tree</h4>
+
+→ Tree in which each `node` has at most two __children__, referred to as ___left child___ and ___right child___.
+
+> ⚙️ Structure:
+
+```
+       [1]
+      /   \
+    [2]   [3]
+   /  \   /  \
+ [4] [5] [6] [7]
+```
+
+> 🪢 Node behavior:
+
+```
+              Node
+ +-------++-----------++-------+
+ |  Left ||   Info    || Right |
+ +-------++-----------++-------+
+    /                       \
+   /                         \
+  °                           °
+
+Info(or key): The value stored in the node.
+Left: Reference to the subtree to the left of the node.
+Right: Reference to the subtree to the right of the node.
+```
+
+> Main Operations:
+
+- ___Inseertion___: If the node value is entered by less than the current node value, the new node is placed on the left, or if the value is greater, the new node is placed on the right. This process continues recursively until the correct location for the node is found.
+- ___Search___: It starts at the root and compares the value to be searched with the value of the current node, if the value is smaller, the search continues to the left; if it is larger, continue to the right. The process continues until the value is found or there are no more nodes to traverse.
+- ___Removal___: Removing a node in a binary tree has three main cases: <br>
+1️⃣ - _Leaf node (no children)_: The node is simply removed. <br>
+2️⃣ - _Node with one child_: The node to be removed is replaced by its only child. <br>
+3️⃣ - _Node with two children_: In this case, the node is replaced by the smallest node in the right subtree (the successor) or the largest node in the left subtree (the predecessor), and the replacement node is removed from its original position.
+- ___Find Min/Max___: To find the minimum value in a binary search tree (BST), just follow the pointers to the left until you find the last node, to find the maximum value, just follow the pointers to the right until the end.
+- ___Check if it is empty___: Check if the binary tree is empty, if the root is `None`, the tree is empty.
+
+> 🔀 Routes:
+
+* `Pre-order:` <br>
+1️⃣ - Visit the root. <br>
+2️⃣ - The left subtree is traversed in previous order. <br>
+3️⃣ - The right subtree is traversed in previous order.
+
+* `In order:` <br>
+1️⃣ - The left subtree is traversed in symmetric order. <br>
+2️⃣ - Visit the root. <br>
+3️⃣ - The right subtree is traversed in symmetric order.
+
+* `Post-order:` <br>
+1️⃣ - Traverse the left subtree in later order. <br>
+2️⃣ - Traverse the right subtree in later order. <br>
+3️⃣ - Visit the root.
+
+```
+# Pre-order example:
+def to_string_pre_order(self):
+    if self.is_empty():
+        return "empty tree"
+    return self._to_string_pre_order(self.root)
+
+def _to_string_pre_order(self, current):
+    if current is None:
+        return ""
+    return (str(current) + " " + 
+            self._to_string_pre_order(current.get_left()) + 
+            self._to_string_pre_order(current.get_right()))
+
+# In order example:
+def to_string_in_order(self):
+        if self.is_empty():
+            return "empty tree"
+        return self._to_string_in_order(self.root)
+
+    def _to_string_in_order(self, current):
+        if current is None:
+            return ""
+        return (self._to_string_in_order(current.get_left()) +
+                str(current) + " " +
+                self._to_string_in_order(current.get_right()))
+
+# Post-order example:
+def to_string_post_order(self):
+    if self.is_empty():
+        return "empty tree"
+    return self._to_string_post_order(self.root)
+
+def _to_string_post_order(self, current):
+    if current is None:
+        return ""
+    return (self._to_string_post_order(current.get_left()) + 
+            self._to_string_post_order(current.get_right()) + 
+            str(current) + " ")
+```
+
+> ⏳ Time Complexity (O)
+
+→ In _search_, _insertion_ and _removal_ operations:
+
+* ✅ `Best case:` _O(log₂n)_ <br>
+📈 When the tree is balanced, at each step _half of the remaining nodes are eliminated_.
+
+* ⚖️ `Average case:` _O(log₂n)_ <br>
+📊 On average, a reasonably balanced tree is assumed, especially with _randomization_ or _readjustment_ techniques.
+
+* ❌ `Worst case:` _O(n)_ <br>
+📉 When a tree ___degenerates___, each operation may require time proportional to the number of elements, as in a linked list.
+
+<h3>🧮 Hash Table</h3>
+
+→ `Hash tables` are extremely efficient data structures for storing and searching data in time close to _O(1)_ on average, which makes them ideal for scenarios where fast insertion, search and removal operations are required. <br>
+
+⚠️ ___`Hash table` is not a sequential structure___: unlike structures such as `lists`, `arrays` or `queues`, which are sequential and maintain the insertion order of elements, `hash tables` do not have a defined order for the data. Instead, data is stored in different buckets based on the value generated by a `hash function` applied to the `keys`. <br>
+
+🔢 ___`Hash`___: is a term that refers to the result of a `hash function`, which is a mathematical function used to map arbitrary-sized data to fixed-sized values, usually integers. The value generated by this function is called a hash value or simply a `hash`.
+
+```
+# Simple Hash Function:
+def simple_hash(key, table_size):
+    return sum(ord(c) for c in key) % table_size
+
+# Cryptographic Hash Functions:
+import hashlib
+def hash_sha256(key):
+    return hashlib.sha256(key.encode()).hexdigest()
+
+# Hash Functions for Integers:
+def integer_hash(key, table_size):
+    return key % table_size
+
+# Python's Default Hash Function:
+def optimized_hash(key, table_size):
+    return hash(key) % table_size
+```
+
+> ⚙️ Structure:
+
+- 🔐 `Key and Value`: The hash table stores key-value pairs. The key is used to uniquely identify each entry, while the value is the information associated with that key.
+- 🟰 `Hash function`: To quickly find the index at which a value will be stored, a hash function is used. This function transforms the key into a number (usually a numeric index) that indicates the position in the table where the value will be stored. The hash function must be ___deterministic___, that is, for the same key, it will always return the same value.
+- 🛗 `Buckets`: The table is divided into _n_ positions (where n is the size of the array). Each bucket can store one value or, in case of collisions, multiple values ​​associated with different keys.
+- 💥 `Collisions`: Even with a good hash function, two or more keys can result in the same index (called a collision). There are techniques for resolving collisions, such as: <br>
+1️⃣ - ___Chaining___: Each table position stores a list of entries. If two keys collide, both are inserted into this list. <br>
+2️⃣ - ___Open addressing___: If there is a collision, the table searches for another available position to store the value (example: __linear probing__, which sequentially searches for the next free position).
+
+```
++-------+-------------------+
+| Index | Data (key, value) |
++-----------+---------------+
+|   0   |  [("Alice", 25)]  |
+|   1   |   [("Bob", 30)]   |
+|   2   | [("Eve", 22), ("Joe", 35) ] <- collision, stored as list
+|   3   |       []          |
+|   4   | [("Charlie", 40)] |
++-------+-------------------+
+            |
+           \|/
++-------+-------------------+
+| Index | Data (key, value) |
++-----------+---------------+
+|   0   |  [("Alice", 25)]  |
+|   1   |   [("Bob", 30)]   |
+|   2   |   [("Eve", 22)]   | <- collision resolved by moving "Joe" to the next available slot
+|   3   |   [("Joe", 35)]   |
+|   4   | [("Charlie", 40)] |
++-------+-------------------+
+```
+> Main Operations:
+
+- ___Insertion___: The key is passed to the hash function, which returns the index of the table where the value will be stored. If there is no collision, the value is stored directly.
+- ___Search___: The key is converted into an index by the hash function. The value corresponding to that index is then returned. If there is a collision, the table needs to check the keys stored in that index (in case of chaining, for example).
+- ___Removal___: The key is used to locate the index. The value is removed, and any collisions must be adjusted depending on the method used.
+- ___Iteration___: To loop through all the values ​​of a hash table, the approach depends on the specific implementation of the hash table and the programming language. However, the general concept is this: you need to access all buckets, and if any bucket contains a linked list (in case there are collisions), you also need to traverse that list to ensure that all elements are visited.
+
+> Use cases:
+
+- 📚 `Dictionaries`: Map keys to values.
+- 🕑 `Caches`: Store values ​​that can be quickly accessed through a key.
+- 🔢 `Sets`: Structures that store unique items and use hashing for quick existence checks.
